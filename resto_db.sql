@@ -2,10 +2,10 @@
 -- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 18, 2016 at 04:50 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Client :  127.0.0.1
+-- Généré le :  Ven 18 Novembre 2016 à 17:53
+-- Version du serveur :  10.1.16-MariaDB
+-- Version de PHP :  7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `resto_db`
+-- Base de données :  `resto_db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact`
+-- Structure de la table `contact`
 --
 
 CREATE TABLE `contact` (
@@ -35,16 +35,16 @@ CREATE TABLE `contact` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `contact`
+-- Contenu de la table `contact`
 --
 
 INSERT INTO `contact` (`id`, `lastname`, `firstname`, `mail`, `mail_content`) VALUES
-(1, 'xu', 'jie', 'jaycxu@sina.com', 'wrt;l''\\lkjhfdsaJKL/LGHFDSAAsjkl;jfdsasjhk.jhgfdwa;LKYUTRE');
+(1, 'azerty', 'azertyuiop', 'azerty@mail.com', '123456789azertyuiopqsdfghjklmwxcvbn');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `infos`
+-- Structure de la table `infos`
 --
 
 CREATE TABLE `infos` (
@@ -65,16 +65,16 @@ CREATE TABLE `infos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `infos`
+-- Contenu de la table `infos`
 --
 
 INSERT INTO `infos` (`id`, `name`, `phone`, `adress`, `mail`, `photo1`, `photo2`, `photo3`, `carroussel_title1`, `carroussel_text1`, `carroussel_title2`, `carroussel_text2`, `carroussel_title3`, `carroussel_text3`) VALUES
-(1, 'DAT mussolini', '0651907680', '23 rue Jean Raymond Guyon', 'p.rous.renaud@gmail.com', '', '', '', '', '', '', '', '', '');
+(1, 'DAT mussolini', '0651907680', '23 rue Jean Raymond Guyon', 'p.rous.renaud@gmail.com', 'pics/photo1_582f1043bde06.jpg', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recipes`
+-- Structure de la table `recipes`
 --
 
 CREATE TABLE `recipes` (
@@ -92,21 +92,19 @@ CREATE TABLE `recipes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `recipes`
+-- Contenu de la table `recipes`
 --
 
 INSERT INTO `recipes` (`id`, `recipe_author`, `recipe_title`, `recipe_time`, `cook_time`, `people`, `ingredients`, `preparation`, `advice`, `photo`, `date_publish`) VALUES
-(11, 'Lysianne', 'Nouveautes', 30, 15, '2', '- 500 g de spaghetti\r\n- 1 oignon\r\n- 2 gousses d''ail\r\n- 1 carotte\r\n- 1 branche de céleri\r\n- 850 g de tomates (fraîches ou en boîte selon la saison)\r\n- 37.5 ml de vin rouge\r\n- 500 g de boeuf haché\r\n- 50 cl de bouillon\r\n- persil\r\n- 1 cuillère à café de sucre\r\n- 2 cuillères à soupe d''huile', 'Hachez l''ail, l''oignon, puis coupez la carotte et le céleri en petits dés (enlevez les principales nervures du céleri).\r\n\r\nFaites chauffer l''huile dans une casserole assez grande. Faites revenir l''ail, l''oignon, la carotte et le céleri à feu doux pendant 5 min en remuant.\r\n\r\nAugmenter la flamme, puis ajoutez le boeuf. Faites brunir et remuez de façon à ce que la viande ne fasse pas de gros paquets.\r\n\r\nAjoutez le bouillon, le vin rouge, les tomates préalablement coupées assez grossièrement, le sucre et le persil haché. Portez à ébullition.\r\n\r\nBaisser ensuite le feu et laissez mijoter à couvert 1h à 1h30, de façon à ce que le vin s''évapore.\r\n\r\nFaites cuire les spaghetti, puis mettez-les dans un plat. Ajoutez la sauce bolognaise.', 'Vous pensiez avoir épuisé les ressources de notre base de recettes ? C''est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.', 'uploads/photo_582dd6f25c8ae.jpg', '2016-11-17 17:12:34'),
-(12, 'Renaud', 'Crepes', 30, 60, '6', '- 500 g de spaghetti\r\n- 1 oignon\r\n- 2 gousses d''ail\r\n- 1 carotte\r\n- 1 branche de céleri\r\n- 850 g de tomates (fraîches ou en boîte selon la saison)\r\n- 37.5 ml de vin rouge\r\n- 500 g de boeuf haché\r\n- 50 cl de bouillon\r\n- persil\r\n- 1 cuillère à café de sucre\r\n- 2 cuillères à soupe d''huile', 'Hachez l''ail, l''oignon, puis coupez la carotte et le céleri en petits dés (enlevez les principales nervures du céleri).\r\n\r\nFaites chauffer l''huile dans une casserole assez grande. Faites revenir l''ail, l''oignon, la carotte et le céleri à feu doux pendant 5 min en remuant.\r\n\r\nAugmenter la flamme, puis ajoutez le boeuf. Faites brunir et remuez de façon à ce que la viande ne fasse pas de gros paquets.\r\n\r\nAjoutez le bouillon, le vin rouge, les tomates préalablement coupées assez grossièrement, le sucre et le persil haché. Portez à ébullition.\r\n\r\nBaisser ensuite le feu et laissez mijoter à couvert 1h à 1h30, de façon à ce que le vin s''évapore.\r\n\r\nFaites cuire les spaghetti, puis mettez-les dans un plat. Ajoutez la sauce bolognaise.', 'Vous pensiez avoir épuisé les ressources de notre base de recettes ? C''est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.', 'uploads/photo_582dd753ea979.jpg', '2016-11-17 17:14:11'),
-(13, 'Lynne', 'Cuisine Asiatique', 15, 45, '4', '- 500 g de spaghetti\r\n- 1 oignon\r\n- 2 gousses d''ail\r\n- 1 carotte\r\n- 1 branche de céleri\r\n- 850 g de tomates (fraîches ou en boîte selon la saison)\r\n- 37.5 ml de vin rouge\r\n- 500 g de boeuf haché\r\n- 50 cl de bouillon\r\n- persil\r\n- 1 cuillère à café de sucre\r\n- 2 cuillères à soupe d''huile', 'Hachez l''ail, l''oignon, puis coupez la carotte et le céleri en petits dés (enlevez les principales nervures du céleri).\r\n\r\nFaites chauffer l''huile dans une casserole assez grande. Faites revenir l''ail, l''oignon, la carotte et le céleri à feu doux pendant 5 min en remuant.\r\n\r\nAugmenter la flamme, puis ajoutez le boeuf. Faites brunir et remuez de façon à ce que la viande ne fasse pas de gros paquets.\r\n\r\nAjoutez le bouillon, le vin rouge, les tomates préalablement coupées assez grossièrement, le sucre et le persil haché. Portez à ébullition.\r\n\r\nBaisser ensuite le feu et laissez mijoter à couvert 1h à 1h30, de façon à ce que le vin s''évapore.\r\n\r\nFaites cuire les spaghetti, puis mettez-les dans un plat. Ajoutez la sauce bolognaise.', 'Vous pensiez avoir épuisé les ressources de notre base de recettes ? C''est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.', 'uploads/photo_582dd7d50dfe7.jpg', '2016-11-17 17:16:21'),
-(15, 'Caroline', 'Soupes', 30, 30, '3', '- 500 g de spaghetti\r\n- 1 oignon\r\n- 2 gousses d''ail\r\n- 1 carotte\r\n- 1 branche de céleri\r\n- 850 g de tomates (fraîches ou en boîte selon la saison)\r\n- 37.5 ml de vin rouge\r\n- 500 g de boeuf haché\r\n- 50 cl de bouillon\r\n- persil\r\n- 1 cuillère à café de sucre\r\n- 2 cuillères à soupe d''huile', 'Hachez l''ail, l''oignon, puis coupez la carotte et le céleri en petits dés (enlevez les principales nervures du céleri).\r\n\r\nFaites chauffer l''huile dans une casserole assez grande. Faites revenir l''ail, l''oignon, la carotte et le céleri à feu doux pendant 5 min en remuant.\r\n\r\nAugmenter la flamme, puis ajoutez le boeuf. Faites brunir et remuez de façon à ce que la viande ne fasse pas de gros paquets.\r\n\r\nAjoutez le bouillon, le vin rouge, les tomates préalablement coupées assez grossièrement, le sucre et le persil haché. Portez à ébullition.\r\n\r\nBaisser ensuite le feu et laissez mijoter à couvert 1h à 1h30, de façon à ce que le vin s''évapore.\r\n\r\nFaites cuire les spaghetti, puis mettez-les dans un plat. Ajoutez la sauce bolognaise.', 'Vous pensiez avoir épuisé les ressources de notre base de recettes ? C''est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.', 'uploads/photo_582dd8586cb27.jpg', '2016-11-17 17:18:32'),
-(16, 'Antony', 'Dessert', 15, 30, '5', '- 500 g de spaghetti\r\n- 1 oignon\r\n- 2 gousses d''ail\r\n- 1 carotte\r\n- 1 branche de céleri\r\n- 850 g de tomates (fraîches ou en boîte selon la saison)\r\n- 37.5 ml de vin rouge\r\n- 500 g de boeuf haché\r\n- 50 cl de bouillon\r\n- persil\r\n- 1 cuillère à café de sucre\r\n- 2 cuillères à soupe d''huile', 'Hachez l''ail, l''oignon, puis coupez la carotte et le céleri en petits dés (enlevez les principales nervures du céleri).\r\n\r\nFaites chauffer l''huile dans une casserole assez grande. Faites revenir l''ail, l''oignon, la carotte et le céleri à feu doux pendant 5 min en remuant.\r\n\r\nAugmenter la flamme, puis ajoutez le boeuf. Faites brunir et remuez de façon à ce que la viande ne fasse pas de gros paquets.\r\n\r\nAjoutez le bouillon, le vin rouge, les tomates préalablement coupées assez grossièrement, le sucre et le persil haché. Portez à ébullition.\r\n\r\nBaisser ensuite le feu et laissez mijoter à couvert 1h à 1h30, de façon à ce que le vin s''évapore.\r\n\r\nFaites cuire les spaghetti, puis mettez-les dans un plat. Ajoutez la sauce bolognaise.', 'Vous pensiez avoir épuisé les ressources de notre base de recettes ? C''est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.', 'uploads/photo_582dd89cc10d8.jpg', '2016-11-17 17:19:40'),
-(17, 'Jayxu', 'Cuisine Française', 15, 30, '6', '- 500 g de spaghetti\r\n- 1 oignon\r\n- 2 gousses d''ail\r\n- 1 carotte\r\n- 1 branche de céleri\r\n- 850 g de tomates (fraîches ou en boîte selon la saison)\r\n- 37.5 ml de vin rouge\r\n- 500 g de boeuf haché\r\n- 50 cl de bouillon\r\n- persil\r\n- 1 cuillère à café de sucre\r\n- 2 cuillères à soupe d''huile', 'Hachez l''ail, l''oignon, puis coupez la carotte et le céleri en petits dés (enlevez les principales nervures du céleri).\r\n\r\nFaites chauffer l''huile dans une casserole assez grande. Faites revenir l''ail, l''oignon, la carotte et le céleri à feu doux pendant 5 min en remuant.\r\n\r\nAugmenter la flamme, puis ajoutez le boeuf. Faites brunir et remuez de façon à ce que la viande ne fasse pas de gros paquets.\r\n\r\nAjoutez le bouillon, le vin rouge, les tomates préalablement coupées assez grossièrement, le sucre et le persil haché. Portez à ébullition.\r\n\r\nBaisser ensuite le feu et laissez mijoter à couvert 1h à 1h30, de façon à ce que le vin s''évapore.\r\n\r\nFaites cuire les spaghetti, puis mettez-les dans un plat. Ajoutez la sauce bolognaise.', 'Vous pensiez avoir épuisé les ressources de notre base de recettes ? C''est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.', 'uploads/photo_582dd9044b7a8.jpg', '2016-11-17 17:21:24');
+(6, '', '123POIUYTREZA', 10, 10, '8', '456123BLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAH', '456123BLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAH', '456123BLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAHBLAH', 'uploads/photo_582db3f08e00d.tmp', '0000-00-00 00:00:00'),
+(7, 'Bob', 'Crème glacée', 30, 15, '3', 'GLACE GLACE GLACE GLACE GLACE GLACE GLACE GLACE GLACE GLACE GLACE GLACE', 'GLACE GLACE GLACE GLACE GLACE GLACE GLACE GLACE', 'GLACE GLACE GLACE GLACE GLACE GLACE GLACE GLACE GLACE', 'uploads/photo_582dcc1b54d39.jpg', '2016-11-17 16:26:19'),
+(8, 'Jay', 'Clavier au soja', 10, 10, '7', 'clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja', 'clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja', 'clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja clavier au soja', 'uploads/photo_582dd1c3706f7.tmp', '2016-11-17 16:31:47'),
+(9, '123azertyuiop', '123azertyuiop', 10, 10, '2', '123azertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiop', '123azertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiop', '123azertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiop', 'uploads/photo_582dd6fa01472.tmp', '2016-11-17 17:12:41');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -120,66 +118,67 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `perm`, `firstname`, `lastname`, `mail`, `password`, `pwd_token`) VALUES
 (1, 2, 'Renaud', 'Rousselle', 'rous.renaud@gmail.com', '$2y$10$x/tsJ15CAfk.mphZX2Etruhq07erKXH4WAwG0ibxw8hLJpL9CW8SW', ''),
 (3, 0, 'bob', 'labeille', 'bob@mail.com', '$2y$10$y0lP/U271mgiVCSTGrOf1.J9bVN5AS4MEoPf4qXnWXJieKC4upJNS', ''),
-(4, 2, 'Jie', 'superXu', 'jaycexu@mail.com', '123456789', '');
+(4, 2, 'Loup', 'Desbois', 'loup@desbois.com', '$2y$10$GUpQdtzTqqJ8w8fKn05j9OI5xDp1y2N.BDhP91P5UryMhGgLwIisy', ''),
+(5, 2, 'Jay', 'SuperXu', 'jayxu@mail.com', '$2y$10$/HoMgGbisQrmnPD1xK12LujGgRHOjvpJBJ40abylerjQh6ATWEC8y', '');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `contact`
+-- Index pour la table `contact`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `infos`
+-- Index pour la table `infos`
 --
 ALTER TABLE `infos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `recipes`
+-- Index pour la table `recipes`
 --
 ALTER TABLE `recipes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `contact`
+-- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `infos`
+-- AUTO_INCREMENT pour la table `infos`
 --
 ALTER TABLE `infos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `recipes`
+-- AUTO_INCREMENT pour la table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
