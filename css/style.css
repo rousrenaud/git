@@ -1,0 +1,104 @@
+/*font-face*/
+			@font-face {
+			font-family: 'courgetteregular';
+			font-style: normal;
+			src: url(fonts/Courgette-Regular.ttf);
+			}
+
+/*wrapper*/
+.container1 {
+    width: 1570px;
+}
+
+body {
+	background-color: antiquewhite;
+	background-image: url(../img/back1.jpg);
+	background-repeat: repeat;
+	background-size: auto;
+}
+
+/*logo resto*/
+h1, h3 {
+	font-family: 'courgetteregular', Arial, sans-serif;
+}
+
+.logomargin {
+	margin-top: -12px;
+}
+
+.navbar-nav {
+    float: right;
+}
+
+.navbar-default {
+    opacity: 0.8;
+}
+
+.active1 {
+	background-color: #e7e7e7;
+}
+
+/*section d'example de recette*/
+.recettemargin {
+	margin: 50px 140px;
+}
+
+.recettehover:hover {
+	opacity: 0.5;
+	transition: opacity .5s;
+	cursor: pointer;
+}
+
+.nouveaute_color {
+	color: red;
+}
+
+.btn-primary {
+    background-color: sandybrown;
+    border-color: sandybrown;
+}
+
+.btn-primary:hover {
+	background-color: sandybrown;
+    border-color: sandybrown;
+	opacity: 0.8;
+	transition: opacity .5s;
+}
+
+.btn-default {
+    border-color: sandybrown;
+    color: sandybrown;
+}
+
+.btn-default:hover {
+    border-color: saddlebrown;
+	background-color: saddlebrown;
+	color: #ffffff;
+	opacity: 0.8;
+	transition: opacity .5s;
+}
+
+/*Button pour tous des recettes*/
+.btnalign {
+	text-align: center;
+	margin: 100px 0px;
+}
+
+.btn-danger {
+    padding: 20px 50px;
+	font-family: 'courgetteregular', Arial, sans-serif;
+	font-size: 20px;
+}
+
+/*footer*/
+.footer {
+	width: 100%;
+	height: 50px;
+	color: #ffffff;
+	background-color: #000000;
+}
+
+.footer p {
+	text-align: center;
+	margin-top: 15px;
+}

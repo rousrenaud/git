@@ -1,0 +1,114 @@
+/*font-face*/
+			@font-face {
+			font-family: 'courgetteregular';
+			font-style: normal;
+			src: url(fonts/Courgette-Regular.ttf);
+			}
+
+/*wrapper*/
+.container1 {
+    width: 1570px;
+}
+
+body {
+	background-color: antiquewhite;
+	background-image: url(../img/back1.jpg);
+	background-repeat: repeat;
+	background-size: auto;
+	height: 100%;
+}
+
+.wrap {
+	min-height: 100%;
+	margin-bottom: -350px;
+}
+
+/*logo resto*/
+h1, h3 {
+	font-family: 'courgetteregular', Arial, sans-serif;
+}
+
+h3 {
+	text-align: center;
+}
+
+.logomargin {
+	margin-top: -12px;
+}
+
+.navbar-nav {
+    float: right;
+}
+
+.navbar-default {
+    opacity: 0.8;
+}
+
+.active {
+	color: #000000;
+}
+
+/*photo couverture*/
+.recetteback {
+	position: absolute;
+	z-index: 0;
+}
+
+/*search bar*/
+.recette_select {
+    margin: 0 auto;
+    padding: 15%;
+    position: relative;
+    z-index: 2;
+}
+
+.recette_text {
+	font-family: 'courgetteregular', Arial, sans-serif;
+	font-size: 40px;
+	position: relative;
+	z-index: 2;
+}
+
+.recette_text_align {
+	text-align: center;
+}
+
+.searchbar_taille {
+	border-radius: 8px;
+    height: 50px;
+}
+
+.form-inline {
+	text-align: center;
+}
+
+.form-inline .form-control {
+    width: 550px;
+}
+
+.btn-danger {
+    border-radius: 8px;
+    padding: 12px 20px;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: #fff;
+}
+
+/*section d'example de recette*/
+.recettemargin {
+	margin: 50px 140px;
+}
+
+/*footer*/
+.footer {
+	width: 100%;
+	height: 50px;
+	color: #ffffff;
+	background-color: #000000;
+	margin-top: 350px;
+}
+
+.footer p {
+	text-align: center;
+	margin-top: 15px;
+}
