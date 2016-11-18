@@ -1,6 +1,5 @@
 <?php
 require_once 'inc/connect.php';
-require_once 'inc/datas.php';
 require_once 'inc/functions.php';
 
 if(!empty($_POST)){
@@ -34,7 +33,7 @@ if(!empty($_POST)){
 		if($insert->execute()){
 			$formValid = true;
 		}
-		else { //如果未被执行
+		else {
 			var_dump($insert->errorInfo());
 		}
 	}
@@ -144,7 +143,7 @@ if(!empty($_POST)){
 		<?php elseif(isset($formValid) && $formValid == true): ?>
 
 			<div class="alert alert-success">
-				Votre message a bien été envoyé
+				Votre message a bien été envoyé !
 			</div>
 		<?php endif; ?>
 	

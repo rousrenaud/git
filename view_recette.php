@@ -17,7 +17,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Mon Recette</title>
+	<title>Détail d'une recette</title>
 	
 	<!--fontawesome-->
 	<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">

@@ -1,6 +1,6 @@
 <?php
 require_once 'inc/connect.php';
-require_once 'inc/datas.php';
+
 
 $itemsPerPage = 6;
 
@@ -27,7 +27,7 @@ else {
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Mon Resto</title>
+	<title>Azerquipe3</title>
 	
 	<!--fontawesome-->
 	<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
@@ -164,7 +164,7 @@ else {
 <!--section d'example de recette-->
 <?php if(empty($recettename)): ?>
 	<tr>
-		<td colspan="5"><h1>Aucun recette trouvé!</h1></td>
+		<td colspan="5"><h1>Aucune recette trouvée!</h1></td>
 	</tr>
 		<?php else: ?>
 <form method="get">	
