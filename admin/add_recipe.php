@@ -42,54 +42,55 @@ if(!empty($_POST) && $is_logged){
     }
 
     if(!minAndMaxLength($post['advice'], 5, 500)) {
-        $errors = 'Les conseils doivent comprendre entre 5 et 500 caractères';
-    }
+		$errors[] = 'Les conseils doivent comprendre entre 5 et 500 caractères';
+	}
 
-    // vérification de l'upload de fichier et envoi au serveur 
-    if(!is_uploaded_file($_FILES['photo']['tmp_name']) || !file_exists($_FILES['photo']['tmp_name'])){
-        $errors[] = 'Vous devez ajouter une photo de votre recette';
-    }
-    else{
-        $finfo = new finfo();
-        $mimeType = $finfo->file($_FILES['photo']['tmp_name'], FILEINFO_MIME_TYPE);
+	// vérification de l'upload de fichier et envoi au serveur 
+	if(!is_uploaded_file($_FILES['photo']['tmp_name']) || !file_exists($_FILES['photo']['tmp_name'])){
+		$errors[] = 'Vous devez ajouter une photo de votre recette';
+	}
+	else{
+		$finfo = new finfo();
+		$mimeType = $finfo->file($_FILES['photo']['tmp_name'], FILEINFO_MIME_TYPE);
 
-        if(in_array($mimeType, $mimeTypeAllow)){
-            $photoName = uniqid('photo_');
-            $photoName.= '.'.pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+		if(in_array($mimeType, $mimeTypeAllow)){
+			$photoName = uniqid('photo_');
+			$photoName.= '.'.pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
 
-            if(!is_dir($dirUpload)){
-                mkdir($dirUpload, 0755);
-            }
+			if(!is_dir($dirUpload)){
+				mkdir($dirUpload, 0755);
+			}
 
-            if(!move_uploaded_file($_FILES['photo']['tmp_name'], $dirUpload.$photoName)) {
-                $errors[] = 'Erreur lors de l\'envoi de votre photo';
-            }
-        }
-        else {
-            $errors[] = 'Le type de fichier est invalide. Uniquement jpg/jpeg/png.';
-        }
-    }
-    // Vérification des erreurs et envoi en DB
-    if(count($errors) === 0){
-        $insert = $bdd->prepare('INSERT INTO recipes(id_user, recipe_title, recipe_time, cook_time, people, ingredients, preparation, advice, photo, date_publish) VALUES(:id_user, :recipe_title, :recipe_time, :cook_time, :people, :ingredients, :preparation, :advice, :photo, NOW())');
+			if(!move_uploaded_file($_FILES['photo']['tmp_name'], $dirUpload.$photoName)) {
+				$errors[] = 'Erreur lors de l\'envoi de votre photo';
+			}
+		}
+		else {
+			$errors[] = 'Le type de fichier est invalide. Uniquement jpg/jpeg/png.';
+		}
+	}
+	// Vérification des erreurs et envoi en DB
+	if(count($errors) === 0){
+		$insert = $bdd->prepare('INSERT INTO recipes(id_user, recipe_author, recipe_title, recipe_time, cook_time, people, ingredients, preparation, advice, photo, date_publish) VALUES(:id_user, :recipe_author, :recipe_title, :recipe_time, :cook_time, :people, :ingredients, :preparation, :advice, :photo, NOW())');
         
         $insert->bindValue(':id_user', $_SESSION['id']);
-        $insert->bindValue(':recipe_title', $post['recipe_title']);
-        $insert->bindValue(':recipe_time', $post['recipe_time']);
-        $insert->bindValue(':cook_time', $post['cook_time']);
-        $insert->bindValue(':people', $post['people']);
-        $insert->bindValue(':ingredients', $post['ingredients']);
-        $insert->bindValue(':preparation', $post['preparation']);
-        $insert->bindValue(':advice', $post['advice']);
-        $insert->bindValue(':photo', $dirUpload.$photoName);
+        $insert->bindValue(':recipe_author', $post['recipe_author']);
+		$insert->bindValue(':recipe_title', $post['recipe_title']);
+		$insert->bindValue(':recipe_time', $post['recipe_time']);
+		$insert->bindValue(':cook_time', $post['cook_time']);
+		$insert->bindValue(':people', $post['people']);
+		$insert->bindValue(':ingredients', $post['ingredients']);
+		$insert->bindValue(':preparation', $post['preparation']);
+		$insert->bindValue(':advice', $post['advice']);
+		$insert->bindValue(':photo', $dirUpload.$photoName);
 
-        if($insert->execute()){
-            $formValid = true;
-        }
-        else {
-            var_dump($insert->errorInfo());
-        }
-    }
+		if($insert->execute()){
+			$formValid = true;
+		}
+		else {
+			var_dump($insert->errorInfo());
+		}
+	}
 }
 
 
@@ -102,9 +103,9 @@ if(!empty($_POST) && $is_logged){
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Ajouter une recette</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<meta charset="utf-8">
+	<title>Ajouter une recette</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="style/main.css">
 </head>
@@ -129,9 +130,16 @@ if(!empty($_POST) && $is_logged){
 
             <form method="post" class="form-horizontal" enctype="multipart/form-data">
 
+                <!-- Auteur -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="recipe_author">Auteur de la recette : </label>
+                    <div class="col-md-6">
+                        <input type="text" name="recipe_author" id="recipe_author" class="form-control input-md" placeholder="ex: Maïté...">
+                    </div>
+                </div>
                 
                 <!-- Nom de la recette -->
-                <div class="form-group">    
+                <div class="form-group">	
                     <label class="col-md-4 control-label" for="recipe_title">Nom de la recette : </label>
                     <div class="col-md-6">
                         <input type="text" name="recipe_title" id="recipe_title" class="form-control input-md" placeholder="ex: Magrets de canard au miel...">
@@ -198,7 +206,7 @@ if(!empty($_POST) && $is_logged){
                     </div>
                 </div>
 
-                <!-- Photo recette --> 
+                <!-- Avatar --> 
                 <div class="form-group">    
                     <label class="col-md-4 control-label" for="photo">Photo de votre recette : </label>
                     <div class="col-md-6">
