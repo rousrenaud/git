@@ -5,7 +5,7 @@ require_once 'inc/functions.php';
 if(!$is_logged){
     header('Location: index.php');
 }
-
+/*ta mere*/
 $post = [];
 $errors = [];
 $mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png'];
