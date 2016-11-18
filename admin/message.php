@@ -49,11 +49,13 @@ if($select->execute()){
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>message</th>
                         <th>Email</th>
+                        <th>Message</th>
                         <th>Lus/Non lus</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,19 +63,22 @@ if($select->execute()){
                         <tr>
 
                             <th scope="row"><!-- Trouver un moyen d'afficher le nom ou l'ID de la personne ayant publié la recette -->
-                                <?=$contact['id']?>
+                                <?=$contact['id'];?>
                             </td>
                             <td>
-                                <?=$contact['lastname']?>
+                                <?=$contact['lastname'];?>
                             </td>
                             <td>
-                                <?=$contact['firstname']?>
+                                <?=$contact['firstname'];?>
                             </td>
                             <td>
-                                <?=$contact['mail']?>
+                                <?=$contact['mail'];?>
                             </td>
                             <td>
-                                <?=$contact['mail_content']?>
+                                <?=$contact['mail_content'];?>
+                            </td>
+                            <td>
+                                <?=$contact[''];?>
                             </td>
                             <td>
                                 <a href="view_message.php?id=<?=$contact['id'];?>" title="Voir la recette">Lire le message</a>

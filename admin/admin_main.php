@@ -27,7 +27,7 @@ if(!$is_logged){
                 <li><a href="edit_info.php"> Modifier les coordonnées de votre commerce</a></li>
                 <li><a href="list_user.php">Gérer vos utilisateurs</a></li>
                 <li><a href="list_recipe.php">Gérer vos recettes</a></li>
-                <li><a href="contact.php"> Lire les messages qui vous ont été envoyés dans la session "Contact"</a></li>
+                <li><a href="message.php"> Lire les messages qui vous ont été envoyés dans la session "Contact"</a></li>
             </ul>
             Merci de votre confiance !
         </p>

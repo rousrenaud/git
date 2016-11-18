@@ -18,8 +18,8 @@ if(!empty($_POST)){
 	// nettoyage des données entrées
 	$post = array_map('trim', array_map('strip_tags', $_POST));
 
-	if(!minAndMaxLength($post['recipe_author'], 5, 50)){
-		$errors['recipe_author'] = 'Le nom de l\'auteur doit comprendre entre 5 et 50 caractères';
+	if(!minAndMaxLength($post['recipe_author'], 3, 50)){
+		$errors[] = 'Le nom de l\'auteur doit comprendre entre 3 et 50 caractères';
 	}
     
     if(!minAndMaxLength($post['recipe_title'], 5, 50)){
@@ -47,10 +47,10 @@ if(!empty($_POST)){
 	}
 
 	if(!minAndMaxLength($post['advice'], 5, 500)) {
-		$errors = 'Les conseils doivent comprendre entre 5 et 500 caractères';
+		$errors[] = 'Les conseils doivent comprendre entre 5 et 500 caractères';
 	}
 
-	// vérification de l'upload de fichier et envoi au serveur 
+	// vérification de l'upload de fichier et envoi au serveur SuperJay
 
 	if(is_uploaded_file($_FILES['photo']['tmp_name']) || file_exists($_FILES['photo']['tmp_name'])){
 		$finfo = new finfo();
@@ -59,7 +59,6 @@ if(!empty($_POST)){
 		if(in_array($mimeType, $mimeTypeAllow)){
 			$photoName = uniqid('photo_');
 			$photoName.= '.'.pathinfo($_FILES['photo']['tmp_name'], PATHINFO_EXTENSION);
-            echo 'b';
 			if(!is_dir($dirUpload)){
 				mkdir($dirUpload, 0755);
 			}
@@ -245,7 +244,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
             <?php endif; ?>
                 
             <?php if(empty($recipe)): ?>
-                Recette Introuvable
+                Recette non trouvée !
             <?php endif; ?>
             </form>
         <?php endif; ?>

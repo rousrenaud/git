@@ -14,8 +14,9 @@ $errors = [];
 $mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 $dirUpload = 'pics/';
 $formValid = false;
-$pic_Update = false;
-$bg_Update = false;
+$pic1_Update = false;
+$pic2_Update = false;
+$pic3_Update =  false;
 
 //Récupération des données pour affichage des valeurs dans les champs <input>
 $select = $bdd->prepare('SELECT * FROM infos');
@@ -43,66 +44,22 @@ if(!empty($_POST)){
 		$errors['phone'] = 'Le téléphone doit faire minimum 8 caractères';
 	}
     
-    //Vérification de l'upload de l'image du restaurant
-	if(is_uploaded_file($_FILES['photo']['tmp_name']) || file_exists($_FILES['photo']['tmp_name'])){
-		
-		$finfo = new finfo();
-		$mimeType = $finfo->file($_FILES['photo']['tmp_name'], FILEINFO_MIME_TYPE);
-		
-		if(in_array($mimeType, $mimeTypeAllow)){
-			$pic_Name = uniqid('photo_');
-			$pic_Name.= '.'.pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-
-			if(!is_dir($dirUpload)){
-				mkdir($dirUpload, 0755);
-			}
-
-
-			if(!move_uploaded_file($_FILES['photo']['tmp_name'], $dirUpload.$pic_Name)){
-				$errors['pic'] = 'Le téléchargement de la première image a échoué';
-			}
-		$pic_Update = true;
-		}
-		else{
-			$errors['pic'] = 'Le type de fichier est invalide. Uniquement jpg/gif/png.'; 
-		}
-	}
     
-    //Vérification de l'upload de l'image de background
-	if(is_uploaded_file($_FILES['background']['tmp_name']) || file_exists($_FILES['background']['tmp_name'])){
-		
-		$finfo = new finfo();
-		$mimeType = $finfo->file($_FILES['background']['tmp_name'], FILEINFO_MIME_TYPE);
-		
-		if(in_array($mimeType, $mimeTypeAllow)){
-			$bg_Name = uniqid('background_');
-			$bg_Name.= '.'.pathinfo($_FILES['background']['name'], PATHINFO_EXTENSION);
-
-			if(!is_dir($dirUpload)){
-				mkdir($dirUpload, 0755);
-			}
-
-
-			if(!move_uploaded_file($_FILES['background']['tmp_name'], $dirUpload.$bg_Name)){
-				$errors['bg'] = 'Le téléchargement de la seconde image a échoué';
-			}
-		$bg_Update = true;
-		}
-		else{
-			$errors['bg'] = 'Le type de fichier est invalide. Uniquement jpg/gif/png.'; 
-		}
-	}
     
     //Insertion des données dans la DB
 	if(count($errors) === 0){
 		$columnSql = 'name = :name, phone = :phone, adress = :adress, mail = :mail ';
 
 		if($pic_Update){
-			$columnSql.=', main_photo = :photo';
+			$columnSql.=', photo1 = :photo1';
 		}
 
-		if($bg_Update){
-			$columnSql.=', main_bg = :bg';
+		if($pic_Update){
+			$columnSql.=', photo2 = :photo2';
+		}
+
+		if($pic_Update){
+			$columnSql.=', photo3 = :photo3';
 		}
 
 		$insert = $bdd->prepare('UPDATE infos SET '.$columnSql.' WHERE id=1');
@@ -112,12 +69,16 @@ if(!empty($_POST)){
 		$insert->bindValue(':adress', $post['adress']);
 		$insert->bindValue(':mail', $post['mail']);
 		/*$insert->bindValue(':map', $post['map']);*/
-		if($pic_Update){
-			$insert->bindValue(':photo', $dirUpload.$pic_Name);
+		if($pic1_Update){
+			$insert->bindValue(':photo1', $dirUpload.$pic1_Name);
 		}
 
-		if($bg_Update){
-			$insert->bindValue(':bg', $dirUpload.$bg_Name);
+		if($pic2_Update){
+			$insert->bindValue(':photo2', $dirUpload.$pic2_Name);
+		}
+
+		if($pic3_Update){
+			$insert->bindValue(':photo3', $dirUpload.$pic3_Name);
 		}
 
 		if($insert->execute()){
@@ -143,9 +104,10 @@ if(!empty($_POST)){
 <body>
     <?php include_once 'inc/navbar.php' ?>
     <main class="container">
-		<form method="post" class="form-horizontal" enctype="multipart/form-data">
+		<form method="POST" class="form-horizontal" enctype="multipart/form-data">
             <div class="col-md-12">
-				<h2>Mis à jour des coordonnées</h2>
+				<h2>Mise à jour des coordonnées</h2>
+				<a href="edit_carroussel.php">Changer le contenu du carroussel</a>
             </div>
             
             <!-- Nom du restaurant -->
@@ -183,29 +145,15 @@ if(!empty($_POST)){
 					<?php if(isset($errors['mail'])){ echo '<span style="color:red;">'.$errors['mail'].'</span>';} ?>
 				</div>
 			</div>
-           
-            <!-- Image restaurant -->
-            <div class="form-group">
-            	<label class="col-md-4 control-label" for="photo">Photo du restaurant</label>  
-            	<div class="col-md-6">
-            		<input id="photo" name="photo" type="file"  class="form-control input-md">
-            	</div>
+
+			<!-- Submit -->
+        	<div class="form-group">
+       	    <div class="col-md-4 col-md-offset-4">
+			    <button id="" name="" class="btn btn-info btn-block">Editer</button>
             </div>
-            
-            <!-- Image couverture -->
-            <div class="form-group">
-            	<label class="col-md-4 control-label" for="bachground">Photo de couverture</label>  
-            	<div class="col-md-6">
-            		<input id="background" name="background" type="file"  class="form-control input-md">
-            	</div>
-            </div>
-            
-            <!-- Submit -->
-            <div class="form-group">
-        	    <div class="col-md-4 col-md-offset-4">
-				    <button id="" name="" class="btn btn-info btn-block">Editer</button>
-                </div>
-            </div>
+        </div>
         </form>
+       </main>
 </body>
 </html>
+

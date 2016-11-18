@@ -2,7 +2,6 @@
 require_once 'inc/session.php';
 require_once 'inc/connect.php';
 require_once 'inc/functions.php';
-require_once 'vendor/autoload.php';
 if(!$is_logged){
     header('Location: index.php');
 }
@@ -28,6 +27,15 @@ if(!empty($_POST)){
 	if(!filter_var($post['mail'], FILTER_VALIDATE_EMAIL)){
 		$errors[] = 'Votre email est invalide';
 	}
+	elseif(isset($post['mail'])){
+        $req = $bdd->prepare('SELECT mail FROM users WHERE mail = :mail');
+        $req->bindValue(':mail', $post['mail']);
+        if($req->execute()){
+            if($req->rowCount() !=0){
+                $errors[] = 'Le mail rentré existe déjà';
+            }
+        }
+    }
     
     if(!is_numeric($post['perm'])){
         $errors[] = 'Il faut sélectionner un niveau de permissions';
