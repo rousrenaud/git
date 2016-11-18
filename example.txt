@@ -1,0 +1,73 @@
+<form method="get">
+<div class="bs-example recettemargin" data-example-id="thumbnails-with-custom-content">
+	<div class="row" style="margin: 0;">
+	  <div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+		  <img src="img/thai-food-518035_640.jpg" alt="nouveaute" class="recettehover">
+		  <div class="caption">
+			<h3 class="nouveaute_color"><i class="fa fa-heart" aria-hidden="true"></i>Nouveautes !</h3>
+			<p>Vous pensiez avoir épuisé les ressources de notre base de recettes ? C'est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.</p>
+			<p><a href="recette_detail/index.php?id=<?=$user['id'];?>" class="btn btn-default" role="button">Savoir +</a></p>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+		  <img src="img/pancakes-984439_640.jpg" alt="crepes" class="recettehover">
+		  <div class="caption">
+			<h3>Crepes</h3>
+			<p>Vous pensiez avoir épuisé les ressources de notre base de recettes ? C'est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.</p>
+			<p><a href="recette_detail/index.php?id=<?=$user['id'];?>" class="btn btn-default" role="button">Savoir +</a></p>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+		  <img src="img/green-dragon-vegetable-1707089_640.jpg" alt="vegetable" class="recettehover">
+		  <div class="caption">
+			<h3>Cuisine Asiatique</h3>
+			<p>Vous pensiez avoir épuisé les ressources de notre base de recettes ? C'est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.</p>
+			<p><a href="recette_detail/index.php?id=<?=$user['id'];?>" class="btn btn-default" role="button">Savoir +</a></p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+	<div class="row" style="margin: 0;margin-top: 50px;">
+	  <div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+		  <img src="img/appetizer-2802_640.jpg" alt="appetizer" class="recettehover">
+		  <div class="caption">
+			<h3>Cuisine Française</h3>
+			<p>Vous pensiez avoir épuisé les ressources de notre base de recettes ? C'est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.</p>
+			<p><a href="recette_detail/index.php?id=<?=$user['id'];?>" class="btn btn-default" role="button">Savoir +</a></p>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+		  <img src="img/soup-1787997_640.jpg" alt="soupe" class="recettehover">
+		  <div class="caption">
+			<h3>Soupes</h3>
+			<p>Vous pensiez avoir épuisé les ressources de notre base de recettes ? C'est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.</p>
+			<p><a href="recette_detail/index.php?id=<?=$user['id'];?>" class="btn btn-default" role="button">Savoir +</a></p>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+		  <img src="img/blueberries-1576409_640.jpg" alt="vegetable" class="recettehover">
+		  <div class="caption">
+			<h3>Dessert</h3>
+			<p>Vous pensiez avoir épuisé les ressources de notre base de recettes ? C'est compter sans le talent de nos visiteurs... Retrouvez ici-même les dernières recettes rentrées en ligne.</p>
+			<p><a href="recette_detail/index.php?id=<?=$user['id'];?>" class="btn btn-default" role="button">Savoir +</a></p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+</form>	
