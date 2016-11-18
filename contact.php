@@ -1,17 +1,16 @@
 <?php
 require_once 'inc/connect.php';
+require_once 'inc/datas.php';
 require_once 'inc/functions.php';
-
-$errors = [];
 
 if(!empty($_POST)){
 	$post = array_map('trim', array_map('strip_tags', $_POST));
 
-	if(!minAndMaxLength($post['firstname'], 3, 20)){
+	if(!minAndMaxLength($post['firstname'], 2, 20)){
 		$errors[] = 'Votre prénom doit comporter entre 3 et 20 caractères';
 	}
 
-	if(!minAndMaxLength($post['lastname'], 3, 20)){
+	if(!minAndMaxLength($post['lastname'], 2, 20)){
 		$errors[] = 'Votre nom doit comporter entre 3 et 20 caractères'; 
 	}
 
@@ -35,9 +34,8 @@ if(!empty($_POST)){
 		if($insert->execute()){
 			$formValid = true;
 		}
-		else {
+		else { //如果未被执行
 			var_dump($insert->errorInfo());
-			die;
 		}
 	}
 

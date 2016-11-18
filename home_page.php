@@ -1,5 +1,8 @@
 <?php
 require_once 'inc/connect.php';
+require_once 'inc/datas.php';
+
+$itemsPerPage = 6;
 
 if(!empty($_GET)) {
 	$get = array_map('trim', array_map('strip_tags', $_GET));
@@ -9,7 +12,12 @@ if(!empty($_GET)) {
 	}
 }
 
-
+/*if(isset($_GET['page']) && !empty($_GET['page']) && is_numeric($_GET['page'])){
+	$page = (int) $_GET['page'];
+}
+else {
+	$page = 1;
+}*/
 
 ?>
 
@@ -62,7 +70,7 @@ if(!empty($_GET)) {
 </head>
 
 <?php
-    $search = $bdd->prepare('SELECT * FROM recipes');
+    $search = $bdd->prepare("SELECT * FROM recipes");
 
     if($search->execute()){
     $recettename = $search->fetchAll(PDO::FETCH_ASSOC);
@@ -119,21 +127,21 @@ if(!empty($_GET)) {
 		</ol> 
 		<div class="carousel-inner" role="listbox"> 
 			<div class="item"> 
-				<img alt="900x500" src="img/photodicouverte.jpg" data-holder-rendered="true"> 
+				<img alt="1920x756" src="img/photodicouverte.jpg" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
 					<h3>Bienvenue sur Azerquipe3 !</h3> 
 					<p>Vous trouverez ici de nombreuses idées de recettes..</p> 
 				</div> 
 			</div> 
 			<div class="item"> 
-				<img alt="900x500" src="img/photodicouverte1.jpg" data-holder-rendered="true"> 
+				<img alt="1920x756" src="img/photodicouverte1.jpg" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
 					<h3>Un descriptif complet</h3> 
 					<p>..du temps de préparation aux petits conseils..</p> 
 				</div> 
 			</div> 
 			<div class="item active"> 
-				<img alt="900x500" src="img/photodicouverte2.jpg" data-holder-rendered="true"> 
+				<img alt="1920x756" src="img/photodicouverte2.jpg" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
 					<h3>Laissez nous un message</h3> 
 					<p>.. et n'hésitez pas à cliquer sur le lien "Contact" en haut pour nous écrire !</p> 
@@ -156,7 +164,7 @@ if(!empty($_GET)) {
 <!--section d'example de recette-->
 <?php if(empty($recettename)): ?>
 	<tr>
-		<td colspan="5"><h1>Aucune recette trouvée!</h1></td>
+		<td colspan="5"><h1>Aucun recette trouvé!</h1></td>
 	</tr>
 		<?php else: ?>
 <form method="get">	

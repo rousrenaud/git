@@ -59,6 +59,7 @@ h3 {
 .recetteback {
 	position: absolute;
 	z-index: 0;
+	/*margin-top: -100px;*/
 }
 
 /*recette detail*/
@@ -108,6 +109,9 @@ h3 {
     height: 50px;
 }
 
+.formmargin {
+	margin: 0px 50px;
+}
 
 /*section d'example de recette*/
 .recettemargin {
