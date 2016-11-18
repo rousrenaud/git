@@ -1,7 +1,5 @@
 <?php
 require_once 'inc/connect.php';
-require_once 'inc/datas.php';
-
 
 if(!empty($_GET)) {
 	$get = array_map('trim', array_map('strip_tags', $_GET));

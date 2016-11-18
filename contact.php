@@ -1,6 +1,5 @@
 <?php
 require_once 'inc/connect.php';
-require_once 'inc/datas.php';
 require_once 'inc/functions.php';
 
 if(!empty($_POST)){

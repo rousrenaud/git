@@ -1,6 +1,5 @@
 <?php
 require_once 'inc/connect.php';
-require_once 'inc/datas.php';
 
 $searchSQL = '';
 $get = [];
