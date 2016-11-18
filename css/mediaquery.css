@@ -5,7 +5,21 @@
 }
 
 @media screen and (max-width: 1024px) {
-	 
+	.recette_text {
+		font-size: 35px;
+	}
+	
+	.searchbar_taille {
+		height: 40px;
+	}
+	
+	.form-inline .form-control {
+    	width: 400px;
+	}
+	
+	.btn-danger {
+    	padding: 8px 20px;
+	}
 }
 
 @media screen and (max-width: 960px) {
@@ -13,7 +27,17 @@
 }
 
 @media screen and (max-width: 768px) {
+	.recette_text {
+		font-size: 25px;
+	}
 	
+	.form-inline .form-control {
+    	width: 400px;
+	}
+	
+	.btn-danger {
+    	padding: 8px 20px;
+	}
 }
 
 @media screen and (max-width: 568px) {
