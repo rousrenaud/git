@@ -6,7 +6,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 	$select = $bdd->prepare('SELECT * FROM recipes WHERE id = :idUser');
 	$select->bindValue(':idUser', $_GET['id'], PDO::PARAM_INT);
 	if($select->execute()){
-		$user = $select->fetch(PDO::FETCH_ASSOC);
+		$recipe = $select->fetch(PDO::FETCH_ASSOC);
 	}
 }
 ?>
@@ -104,7 +104,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 </div>
 	
 <!--Recette detail-->
-<?php if(empty($user)): ?>
+<?php if(empty($recipe)): ?>
 	<div class="alert alert-danger">
 		Oups! Recette non trouvée!
 	</div>
@@ -113,26 +113,26 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 <div class="container">
 	<div class="row" style="margin: 0;">
 		<div class="col-lg-12">
-			<h1><?=$user['recipe_title'];?></h1>
-			<p><?=$user['recipe_author'];?></p>
+			<h1><?=$recipe['recipe_title'];?></h1>
+			<p><?=$recipe['recipe_author'];?></p>
 		</div>
 	</div>
 	
 	<div class="row" style="margin: 0;">
 		<div class="col-md-6">
-			<img src="admin/<?=$user['photo'];?>" alt="soup" class="img-thumbnail img-responsive">
+			<img src="admin/<?=$recipe['photo'];?>" alt="soup" class="img-thumbnail img-responsive">
 		</div>
 		<div class="col-md-6">
-			<p class="detailcolor">Temps de préparation : <?=$user['cook_time'];?><span> minutes</span></p>	
-			<p class="detailcolor">Temps de cuisson : <?=$user['recipe_time'];?><span> minutes</span></p>
-			<p class="detailcolor">Ingrédients (pour <?=$user['people'];?><span></span> personnes) : </p>
+			<p class="detailcolor">Temps de préparation : <?=$recipe['cook_time'];?><span> minutes</span></p>	
+			<p class="detailcolor">Temps de cuisson : <?=$recipe['recipe_time'];?><span> minutes</span></p>
+			<p class="detailcolor">Ingrédients (pour <?=$recipe['people'];?><span></span> personnes) : </p>
 			<ul>
-				<li><?=$user['ingredients'];?></li>
+				<li><?=$recipe['ingredients'];?></li>
 			</ul>
 			<p class="detailcolor1">Préparation de la recette :</p>
-			<p><?=$user['preparation'];?></p>
+			<p><?=$recipe['preparation'];?></p>
 			<p class="detailcolor1">Conseils :</p>
-			<p><?=$user['advice'];?></p>
+			<p><?=$recipe['advice'];?></p>
 		</div>
 	</div>
 </div>

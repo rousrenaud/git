@@ -18,7 +18,7 @@ if(isset($get['search']) && !empty($get['search'])){
 }
 
 if($query->execute()){
-	$users = $query->fetchAll(PDO::FETCH_ASSOC);
+	$recipes = $query->fetchAll(PDO::FETCH_ASSOC);
 }
 else {
 	// A des fins de debug si la requète SQL est en erreur
@@ -161,15 +161,15 @@ else {
 	
 <div class="bs-example recettemargin" data-example-id="thumbnails-with-custom-content">
 	<div class="row" style="margin: -80px;">
-	  <?php foreach($recettename as $user): ?>
+	  <?php foreach($recettename as $recipe): ?>
 	  <div class="col-sm-6 col-md-3">
 		<div class="thumbnail">
-		  <img src="admin/<?=$user['photo'];?>" alt="nouveaute" class="recettehover">
+		  <img src="admin/<?=$recipe['photo'];?>" alt="nouveaute" class="recettehover">
 		  <div class="caption">
-			<h3 class="nouveaute_color"><?php if(isset($get['search']) && !empty($get['search'])){str_replace($get['search'], '<span style="background:yellow;">' . $get['search'] . '</span>', $user['recipe_title']);}else {echo $user['recipe_title'];}?></h3>
-			<p class="auteuralign"><?=$user['recipe_author'];?></p>
+			<h3 class="nouveaute_color"><?php if(isset($get['search']) && !empty($get['search'])){str_replace($get['search'], '<span style="background:yellow;">' . $get['search'] . '</span>', $recipe['recipe_title']);}else {echo $recipe['recipe_title'];}?></h3>
+			<p class="auteuralign"><?=$recipe['recipe_author'];?></p>
 			<div class="btnalign">
-				<a href="view_recette.php?id=<?=$user['id'];?>">
+				<a href="view_recette.php?id=<?=$recipe['id'];?>">
 					<button type="button" class="btn btn-danger">En savoir + 
 					</button>
 				</a>
