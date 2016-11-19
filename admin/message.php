@@ -78,7 +78,7 @@ if($select->execute()){
                                 <?=$contact['mail_content'];?>
                             </td>
                             <td>
-                                <?=$contact[''];?>
+                                <?=$contact['checked'];?>
                             </td>
                             <td>
                                 <a href="view_message.php?id=<?=$contact['id'];?>" title="Voir la recette">Lire le message</a>

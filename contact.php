@@ -25,12 +25,13 @@ if(!empty($_POST)){
 
 
 	if(count($errors) === 0){
-		$insert = $bdd->prepare('INSERT INTO contact(firstname, lastname, mail, mail_content) VALUES(:firstname, :lastname, :mail, :mail_content)'); 
+		$insert = $bdd->prepare('INSERT INTO contact(firstname, lastname, mail, mail_content, checked) VALUES(:firstname, :lastname, :mail, :mail_content, :checked)'); 
 
 		$insert->bindValue(':firstname', $post['firstname']); 
 		$insert->bindValue(':lastname', $post['lastname']); 
 		$insert->bindValue(':mail', $post['email']); 
 		$insert->bindValue(':mail_content', $post['message']);
+		$insert->bindValue(':checked', 0);
 
 		if($insert->execute()){
 			$formValid = true;
