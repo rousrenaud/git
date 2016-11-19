@@ -1,6 +1,7 @@
 <?php
 require_once 'inc/session.php';
 require_once 'inc/connect.php';
+
 if(!$is_logged){
     header('Location: index.php');
 }

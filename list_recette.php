@@ -2,6 +2,7 @@
 require_once 'inc/connect.php';
 
 $searchSQL = '';
+$get = [];
 $searchdetail = $_GET['search'];
 
 if(!empty($_GET)) {

@@ -2,6 +2,8 @@
 require_once 'inc/connect.php';
 require_once 'inc/functions.php';
 
+$errors = [];
+
 if(!empty($_POST)){
 	$post = array_map('trim', array_map('strip_tags', $_POST));
 
