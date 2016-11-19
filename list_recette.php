@@ -1,7 +1,7 @@
 <?php
 require_once 'inc/connect.php';
 
-
+$searchSQL = '';
 $searchdetail = $_GET['search'];
 
 if(!empty($_GET)) {
@@ -18,7 +18,7 @@ if(!empty($_GET)) {
 	}
 }
 
-$query = $bdd->prepare('SELECT * FROM recipes' . $searchSQL);
+$query = $bdd->prepare('SELECT * FROM recipes'.$searchSQL);
 if(isset($get['search']) && !empty($get['search'])){
 	$query->bindValue(':search', $get['search']);
 }
