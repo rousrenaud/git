@@ -67,7 +67,7 @@ if(!empty($_POST) && !$is_logged){
             <div class="form-group">
 				<label class="col-md-4 control-label" for="mail">Email</label>  
 				<div class="col-md-4">
-				    <input id="mail" name="mail" type="mail" class="form-control input-sd ">
+				    <input id="mail" name="mail" type="mail" class="form-control input-sd" placeholder="Entrez votre mail">
 				</div>
             </div>
                
