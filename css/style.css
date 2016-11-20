@@ -189,4 +189,13 @@ h3 {
 .footer p {
 	text-align: center;
 	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.copy {
+	text-align: center;
+}
+
+.adress {
+	text-align: center;
 }

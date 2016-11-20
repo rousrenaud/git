@@ -14,7 +14,14 @@
 <div style="clear:both;"></div>
 	
 <div class="container footer">
-	<p><i class="fa fa-copyright" aria-hidden="true"></i> Copyright - Azerquipe3</p>
+
+		<div class="col-md-6 copy">
+			<p><i class="fa fa-copyright" aria-hidden="true"></i> Copyright - Azerquipe3</p>
+		</div>
+		<div class="col-md-6 adress">
+			<p>Tel: 05 56 40 66 51&nbsp;Adresse:&nbsp;66 rue Abbé de l'Epée&nbsp;33000&nbsp;Bordeaux&nbsp;Email:resto@mail.com</p>
+		</div>
 </div>
+
 </body>
 </html>
