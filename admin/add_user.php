@@ -24,7 +24,7 @@ if(!empty($_POST)){
 		$errors[] = 'Votre nom doit comporter entre 3 et 20 caractères';
 	}
 
-	if(!filter_var($post['mail'], FILTER_VALIDATE_EMAIL)){
+	if(!preg_match('/[a-z\.\-]+@[a-z]+\.[a-z]{2,3}/i',$post['mail'])){
 		$errors[] = 'Votre email est invalide';
 	}
 	elseif(isset($post['mail'])){

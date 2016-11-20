@@ -7,7 +7,7 @@ $errors = [];
 if(!empty($_POST)){
 	$post = array_map('trim', array_map('strip_tags', $_POST));
 
-	if(!minAndMaxLength($post['firstname'], 2, 20)){
+	if(!preg_match('/[[:upper:]]+/i',$post['firstname'])){
 		$errors[] = 'Votre prénom doit comporter entre 3 et 20 caractères';
 	}
 
@@ -15,7 +15,7 @@ if(!empty($_POST)){
 		$errors[] = 'Votre nom doit comporter entre 3 et 20 caractères'; 
 	}
 
-	if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)){
+	if(!preg_match('/[a-z\.\-]+@[a-z]+\.[a-z]{2,3}/i',$post['mail'])){
 		$errors[] = 'Votre email est invalide';
 	}
 
@@ -29,7 +29,7 @@ if(!empty($_POST)){
 
 		$insert->bindValue(':firstname', $post['firstname']); 
 		$insert->bindValue(':lastname', $post['lastname']); 
-		$insert->bindValue(':mail', $post['email']); 
+		$insert->bindValue(':mail', $post['mail']); 
 		$insert->bindValue(':mail_content', $post['message']);
 		$insert->bindValue(':checked', 0);
 
@@ -167,7 +167,7 @@ if(!empty($_POST)){
 	  <div class="form-group">
 		<label for="email" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="email" placeholder="Email" name="email" id="email">
+      <input type="email" class="form-control" id="email" placeholder="Email" name="mail">
     </div>
 	  </div>
 	  <div class="form-group">
