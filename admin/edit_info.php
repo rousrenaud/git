@@ -43,22 +43,21 @@ if(!empty($_POST)){
 	if(!preg_match('#[0-9]{10,10}#',$post['phone'])){
 		$errors['phone'] = 'Le téléphone doit faire minimum 8 caractères';
 	}
-    
-    
-    
+
+
     //Insertion des données dans la DB
 	if(count($errors) === 0){
 		$columnSql = 'name = :name, phone = :phone, adress = :adress, mail = :mail ';
 
-		if($pic_Update){
+		if($pic1_Update){
 			$columnSql.=', photo1 = :photo1';
 		}
 
-		if($pic_Update){
+		if($pic2_Update){
 			$columnSql.=', photo2 = :photo2';
 		}
 
-		if($pic_Update){
+		if($pic3_Update){
 			$columnSql.=', photo3 = :photo3';
 		}
 

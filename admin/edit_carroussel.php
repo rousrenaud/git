@@ -144,17 +144,23 @@ if(!empty($_POST)){
 		}
 
 		$insert = $bdd->prepare('UPDATE infos SET '.$columnSql.' WHERE id=1');
+			$insert->bindValue(':carroussel_title1', $post['carroussel_title1']);
+			$insert->bindValue(':carroussel_title2', $post['carroussel_title2']);
+			$insert->bindValue(':carroussel_title3', $post['carroussel_title3']);
+			$insert->bindValue(':carroussel_text1', $post['carroussel_text1']);
+			$insert->bindValue(':carroussel_text2', $post['carroussel_text2']);
+			$insert->bindValue(':carroussel_text3', $post['carroussel_text3']);
 
 		if($pic1_Update){
-			$insert->bindValue(':photo1', $dirUpload.$pic1_Name);
+			$insert->bindValue(':photo1', 'admin/'.$dirUpload.$pic1_Name);
 		}
 
 		if($pic2_Update){
-			$insert->bindValue(':photo2', $dirUpload.$pic2_Name);
+			$insert->bindValue(':photo2', 'admin/'.$dirUpload.$pic2_Name);
 		}
 
 		if($pic3_Update){
-			$insert->bindValue(':photo3', $dirUpload.$pic3_Name);
+			$insert->bindValue(':photo3', 'admin/'.$dirUpload.$pic3_Name);
 		}
 
 		if($insert->execute()){

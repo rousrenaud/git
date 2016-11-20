@@ -12,6 +12,11 @@ if(!empty($_GET)) {
 	}
 }
 
+$select = $bdd->query('SELECT * FROM infos');
+if($select->execute()){
+	$info = $select->fetch(PDO::FETCH_ASSOC);
+}
+
 /*if(isset($_GET['page']) && !empty($_GET['page']) && is_numeric($_GET['page'])){
 	$page = (int) $_GET['page'];
 }
@@ -130,24 +135,24 @@ else {
 		</ol> 
 		<div class="carousel-inner" role="listbox"> 
 			<div class="item"> 
-				<img alt="1920x756" src="img/photodicouverte.jpg" data-holder-rendered="true"> 
+				<img alt="1920x756" src="<?php echo $info['photo1']; ?>" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
-					<h3>Bienvenue sur Azerquipe3 !</h3> 
-					<p>Vous trouverez ici de nombreuses idées de recettes..</p> 
+					<h3><?php echo $info['carroussel_title1']; ?></h3> 
+					<p><?php echo $info['carroussel_text1']; ?></p> 
 				</div> 
 			</div> 
 			<div class="item"> 
-				<img alt="1920x756" src="img/photodicouverte1.jpg" data-holder-rendered="true"> 
+				<img alt="1920x756" src="<?php echo $info['photo2']; ?>" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
-					<h3>Un descriptif complet</h3> 
-					<p>..du temps de préparation aux petits conseils..</p> 
+					<h3><?php echo $info['carroussel_title2']; ?></h3> 
+					<p><?php echo $info['carroussel_text2']; ?></p> 
 				</div> 
 			</div> 
 			<div class="item active"> 
-				<img alt="1920x756" src="img/photodicouverte2.jpg" data-holder-rendered="true"> 
+				<img alt="1920x756" src="<?php echo $info['photo3']; ?>" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
-					<h3>Laissez nous un message</h3> 
-					<p>.. et n'hésitez pas à cliquer sur le lien "Contact" en haut pour nous écrire !</p> 
+					<h3><?php echo $info['carroussel_title3']; ?></h3> 
+					<p><?php echo $info['carroussel_text3']; ?></p> 
 				</div> 
 			</div> 
 		</div> 
