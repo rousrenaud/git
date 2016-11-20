@@ -24,20 +24,29 @@ if(!empty($_POST)){
 
 	if(!preg_match('/[a-z\.\-]+@[a-z]+\.[a-z]{2,3}/i',$post['mail'])){
 		$errors[] = 'Votre email est invalide';
+<<<<<<< HEAD
     }
     
 	if(!filter_var($post['mail'], FILTER_VALIDATE_EMAIL)){
 		$errors['mail'] = 'Votre email est invalide';
+=======
+>>>>>>> origin/master
 	}
 
 	if(!empty($post['password']) || $_SESSION['perm'] < 2){
 		$updatePassword = true;
+<<<<<<< HEAD
         
 		if(!preg_match('/[(\w+\s)]{8,20}/i',$post['password'])){
 			$errors[] = 'Votre mot de passe doit comporter entre 8 et 20 caractères';
         }
 		if(!minAndMaxLength($post['password'], 8, 20)){
 			$errors['password'] = 'Votre mot de passe doit comporter entre 8 et 20 caractères';
+=======
+		
+		if(!preg_match('/[(\w+\s)]{8,20}/i',$post['password'])){
+			$errors[] = 'Votre mot de passe doit comporter entre 8 et 20 caractères';
+>>>>>>> origin/master
 		}
 	}
 
