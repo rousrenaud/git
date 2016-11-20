@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 18 Novembre 2016 à 17:53
+-- Généré le :  Dim 20 Novembre 2016 à 15:18
 -- Version du serveur :  10.1.16-MariaDB
--- Version de PHP :  7.0.9
+-- Version de PHP :  5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -31,15 +31,17 @@ CREATE TABLE `contact` (
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
-  `mail_content` text NOT NULL
+  `mail_content` text NOT NULL,
+  `checked` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `contact`
 --
 
-INSERT INTO `contact` (`id`, `lastname`, `firstname`, `mail`, `mail_content`) VALUES
-(1, 'azerty', 'azertyuiop', 'azerty@mail.com', '123456789azertyuiopqsdfghjklmwxcvbn');
+INSERT INTO `contact` (`id`, `lastname`, `firstname`, `mail`, `mail_content`, `checked`) VALUES
+(1, 'azerty', 'azertyuiop', 'azerty@mail.com', '123456789azertyuiopqsdfghjklmwxcvbn', 1),
+(2, 'Rousselle', 'Renaud', 'p.rous.renaud@gmail.com', 'azerty333333333', 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `perm`, `firstname`, `lastname`, `mail`, `password`, `pwd_token`) VALUES
-(1, 2, 'Renaud', 'Rousselle', 'rous.renaud@gmail.com', '$2y$10$x/tsJ15CAfk.mphZX2Etruhq07erKXH4WAwG0ibxw8hLJpL9CW8SW', ''),
+(1, 2, 'Renaud', 'Rousselle', 'rous.renaud@gmail.com', '$2y$10$nVlCUfLJ1E7OOD4HT2i7LO2AJ9Nxt0t.XI03U6Mpg0yHfo/BZKeiO', ''),
 (3, 0, 'bob', 'labeille', 'bob@mail.com', '$2y$10$y0lP/U271mgiVCSTGrOf1.J9bVN5AS4MEoPf4qXnWXJieKC4upJNS', ''),
 (4, 2, 'Loup', 'Desbois', 'loup@desbois.com', '$2y$10$GUpQdtzTqqJ8w8fKn05j9OI5xDp1y2N.BDhP91P5UryMhGgLwIisy', ''),
 (5, 2, 'Jay', 'SuperXu', 'jayxu@mail.com', '$2y$10$/HoMgGbisQrmnPD1xK12LujGgRHOjvpJBJ40abylerjQh6ATWEC8y', '');
@@ -163,7 +165,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `infos`
 --

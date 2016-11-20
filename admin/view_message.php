@@ -11,7 +11,6 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
 	$select->bindValue(':idMessage', $_GET['id'], PDO::PARAM_INT);
 	if($select->execute()) {
 		$contacts = $select->fetchAll(PDO::FETCH_ASSOC);
-		echo 'tamere';
 	}
 }
 
@@ -39,7 +38,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
         <?php if(!empty($contacts)): ?>
             <?php foreach($contacts as $contact): ?>
             <h1>Message : <?=$contact['lastname'];?></h1>
-            
+            <p onload="checked()">Ce message est marqué comme Lu -</p>
             <hr>
             
             <div>
@@ -52,11 +51,21 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
             </div>
             
             <div>
-                <a href="message.php?id=<?=$recipe['id'];?>">Retour</a>
+                <a href="message.php">Retour</a>
                 <a href="delete_message.php?id=<?=$recipe['id'];?>">Supprimer le message</a>
             </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </main>
+    <script>
+    function checked(){
+        <?php
+        $checked = $bdd->prepare('UPDATE contact SET checked= :checked WHERE id= :id');
+        $checked->bindValue(':checked', 1);
+        $checked->bindValue(':id', $_GET['id']);
+        $checked->execute();
+        ?>
+    }
+    </script>
 </body>
 </html>

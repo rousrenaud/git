@@ -78,7 +78,11 @@ if($select->execute()){
                                 <?=$contact['mail_content'];?>
                             </td>
                             <td>
-                                <?=$contact['checked'];?>
+                                <?php if($contact['checked'] == 1){
+                                echo 'Lu';
+                                }
+                                else{echo 'Non Lu';}?>
+                                
                             </td>
                             <td>
                                 <a href="view_message.php?id=<?=$contact['id'];?>" title="Voir la recette">Lire le message</a>
