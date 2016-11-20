@@ -70,10 +70,13 @@ else {
 </head>
 
 <?php
-    $search = $bdd->prepare("SELECT * FROM recipes");
+    $search = $bdd->prepare('SELECT * FROM recipes LEFT JOIN users ON recipes.id_user=users.id');
 
     if($search->execute()){
     $recettename = $search->fetchAll(PDO::FETCH_ASSOC);
+    }
+    else{
+        var_dump($recettename);
     }
 ?>	
 	
@@ -176,7 +179,7 @@ else {
 			  <img src="admin/<?=$user['photo'];?>" alt="nouveaute" class="recettehover">
 			  <div class="caption">
 				<h3 class="nouveaute_color"> - <?=$user['recipe_title'];?> - </h3>
-				<p class="auteuralign"><?=$user['recipe_author'];?></p>
+				<p class="auteuralign"><?=$user['firstname'];?></p>
 				<div class="btnalign">
 					<a href="view_recette.php?id=<?=$user['id'];?>">
 						<button type="button" class="btn btn-danger">En savoir + 

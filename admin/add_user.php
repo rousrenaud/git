@@ -2,6 +2,7 @@
 require_once 'inc/session.php';
 require_once 'inc/connect.php';
 require_once 'inc/functions.php';
+require_once '../vendor/autoload.php';
 if(!$is_logged){
     header('Location: index.php');
 }
@@ -53,7 +54,34 @@ if(!empty($_POST)){
         
 		if($insert->execute()){
 			$formValid = true;
-            //MAIL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            $monMessage = 'Vous avez reçu une invitation pour ajouter du contenu sur <b>O\'Fifou</b>.<br>Vous pouvez vous y connecter à partir du lien suivant:<br><a href="localhost/admin/index.php"<br>
+            Vos coordonnées sont:<ul><li>Mail : '.$post['mail'].'</li><li>Mot de passe : '.$pwd.'</li>';
+                
+                $mail = new PHPMailer;
+                
+                $mail->isSMTP();                                        // Set mailer to use SMTP
+                $mail->Host = 'smtp.mailgun.org';                       // Specify main and backup SMTP servers
+                $mail->SMTPAuth = true;                                 // Enable SMTP authentication
+                $mail->Username = 'postmaster@dev.axw.ovh';             // SMTP username
+                $mail->Password = 'WF3Phil0#3';                         // SMTP password
+                $mail->SMTPSecure = 'tls';                              // Enable TLS encryption, `ssl` also accepted
+                $mail->Port = 587;                                      // TCP port to connect to
+                
+                $mail->CharSet = 'UTF-8';
+                
+                $mail->setFrom('cpasbon@example.com', 'Mailer');
+                $mail->addAddress($post['mail']);               // Name is optional
+                
+                $mail->Subject = 'Inscription o\'Fifou';
+                $mail->Body = $monMessage ;
+                $mail->AltBody = $monMessage;
+                
+                if(!$mail->send()) {
+                    $errors[] = 'Le message n\'a pas été evoyé.';
+                    $errors[] = 'Mailer Error: ' . $mail->ErrorInfo;
+                } else {
+                    $success = true;
+                }
 		}
 		else {
 			var_dump($insert->errorInfo());

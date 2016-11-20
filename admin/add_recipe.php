@@ -17,37 +17,37 @@ if(!empty($_POST) && $is_logged){
     $post = array_map('trim', array_map('strip_tags', $_POST));
     
     if(!preg_match('/[(\w+\s)]{5,140}/i',$post['recipe_title'])){
-        $errors[] = 'Le nom de votre recette doit comprendre entre 5 et 
+        $errors['recipe_title'] = 'Le nom de votre recette doit comprendre entre 5 et 
         140 caractères';
     }
 
     if(!is_numeric($post['recipe_time']) || empty($post['recipe_time'])) {
-        $errors[] = 'Le temps de préparation indiqué est incorrect';
+        $errors['recipe_time'] = 'Le temps de préparation indiqué est incorrect';
     }
 
     if(!is_numeric($post['cook_time']) || empty($post['cook_time'])) {
-        $errors[] = 'Le temps de cuisson indiqué est incorrect';
+        $errors['cook_time'] = 'Le temps de cuisson indiqué est incorrect';
     }   
 
     if(!is_numeric($post['people'])) {
-        $errors[] = 'Le nombre de personnes indiqué est invalide';
+        $errors['people'] = 'Le nombre de personnes indiqué est invalide';
     }
 
     if(!minAndMaxLength($post['ingredients'], 5, 5000)) {
-        $errors[] = 'Votre liste d\'ingrédients doit comprendre entre 5 et 5 000 caractères'; 
+        $errors['ingredients'] = 'Votre liste d\'ingrédients doit comprendre entre 5 et 5 000 caractères'; 
     }
 
     if(!preg_match('/[(\w+\s)]{20,}/i',$post['preparation'])) {
-        $errors[] = 'Votre recette doit comprendre entre 5 et 10 000 caractères'; 
+        $errors['preparation'] = 'Votre recette doit comprendre entre 5 et 10 000 caractères'; 
     }
 
     if(!minAndMaxLength($post['advice'], 5, 500)) {
-		$errors[] = 'Les conseils doivent comprendre entre 5 et 500 caractères';
+		$errors['advice'] = 'Les conseils doivent comprendre entre 5 et 500 caractères';
 	}
 
 	// vérification de l'upload de fichier et envoi au serveur 
 	if(!is_uploaded_file($_FILES['photo']['tmp_name']) || !file_exists($_FILES['photo']['tmp_name'])){
-		$errors[] = 'Vous devez ajouter une photo de votre recette';
+		$errors['photo'] = 'Vous devez ajouter une photo de votre recette';
 	}
 	else{
 		$finfo = new finfo();
@@ -71,10 +71,9 @@ if(!empty($_POST) && $is_logged){
 	}
 	// Vérification des erreurs et envoi en DB
 	if(count($errors) === 0){
-		$insert = $bdd->prepare('INSERT INTO recipes(id_user, recipe_author, recipe_title, recipe_time, cook_time, people, ingredients, preparation, advice, photo, date_publish) VALUES(:id_user, :recipe_author, :recipe_title, :recipe_time, :cook_time, :people, :ingredients, :preparation, :advice, :photo, NOW())');
+		$insert = $bdd->prepare('INSERT INTO recipes(id_user, recipe_title, recipe_time, cook_time, people, ingredients, preparation, advice, photo, date_publish) VALUES(:id_user, :recipe_title, :recipe_time, :cook_time, :people, :ingredients, :preparation, :advice, :photo, NOW())');
         
         $insert->bindValue(':id_user', $_SESSION['id']);
-        $insert->bindValue(':recipe_author', $post['recipe_author']);
 		$insert->bindValue(':recipe_title', $post['recipe_title']);
 		$insert->bindValue(':recipe_time', $post['recipe_time']);
 		$insert->bindValue(':cook_time', $post['cook_time']);
@@ -129,20 +128,15 @@ if(!empty($_POST) && $is_logged){
             <br>
 
             <form method="post" class="form-horizontal" enctype="multipart/form-data">
-
-                <!-- Auteur -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="recipe_author">Auteur de la recette : </label>
-                    <div class="col-md-6">
-                        <input type="text" name="recipe_author" id="recipe_author" class="form-control input-md" placeholder="ex: Maïté...">
-                    </div>
-                </div>
                 
                 <!-- Nom de la recette -->
                 <div class="form-group">	
                     <label class="col-md-4 control-label" for="recipe_title">Nom de la recette : </label>
                     <div class="col-md-6">
                         <input type="text" name="recipe_title" id="recipe_title" class="form-control input-md" placeholder="ex: Magrets de canard au miel...">
+                        <p id="title" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['title'])){echo ['title'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -179,6 +173,9 @@ if(!empty($_POST) && $is_logged){
                     <label class="col-md-4 control-label" for="people">Nombre de personnes : </label>
                     <div class="col-md-6">
                         <input type="text" name="people" id="people" class="form-control input-md" placeholder="2">
+                        <p id="people" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['people'])){echo $errors['people'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -187,6 +184,9 @@ if(!empty($_POST) && $is_logged){
                     <label class="col-md-4 control-label" for="ingredients">Ingrédients : </label>
                     <div class="col-md-6">
                         <textarea name="ingredients" id="ingredients" class="form-control input-md" rows="6" placeholder="ex: 2 magrets de canard gras, 3 cuillères à soupe miel 'mille fleurs' ou autre, 3 cuillères à café de vinaigre balsamique, sel..."></textarea>
+                        <p id="ingredients" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['ingredients'])){echo $errors['ingredients'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -195,6 +195,9 @@ if(!empty($_POST) && $is_logged){
                     <label class="col-md-4 control-label" for="preparation">Préparation de la recette : </label>
                     <div class="col-md-6">
                         <textarea name="preparation" id="preparation" class="form-control input-md" rows="6" placeholder="ex: Inciser les magrets côté peau en quadrillage sans couper la viande. Cuire les magrets à feu vif dans une cocotte en fonte, en commençant par le côté peau..."></textarea>
+                        <p id="preparation" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['preparation'])){echo $errors['preparation'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -203,6 +206,9 @@ if(!empty($_POST) && $is_logged){
                     <label class="col-md-4 control-label" for="advice">Conseils : </label>
                     <div class="col-md-6">
                         <textarea name="advice" id="advice" class="form-control input-md" rows="6" placeholder="ex: Boisson conseillée : Madiran, Chinon.."></textarea>
+                        <p id="advice" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['advice'])){echo $errors['advice'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -211,6 +217,9 @@ if(!empty($_POST) && $is_logged){
                     <label class="col-md-4 control-label" for="photo">Photo de votre recette : </label>
                     <div class="col-md-6">
                         <input id="photo" name="photo" class="form-control input-md" type="file" accept="image/*">
+                        <p id="photo" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['photo'])){echo $errors['photo'];} ?>
+                        </p>
                     </div>
                 </div>
 
