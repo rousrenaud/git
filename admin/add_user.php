@@ -24,14 +24,10 @@ if(!empty($_POST)){
 		$errors['lastname'] = 'Votre nom doit comporter entre 3 et 20 caractères';
 	}
 
-<<<<<<< HEAD
 	if(!preg_match('/[a-z\.\-]+@[a-z]+\.[a-z]{2,3}/i',$post['mail'])){
 		$errors[] = 'Votre email est invalide';
-=======
-	if(!filter_var($post['mail'], FILTER_VALIDATE_EMAIL)){
-		$errors['mail'] = 'Votre email est invalide';
->>>>>>> origin/master
 	}
+
 	elseif(isset($post['mail'])){
         $req = $bdd->prepare('SELECT mail FROM users WHERE mail = :mail');
         $req->bindValue(':mail', $post['mail']);
