@@ -7,11 +7,11 @@ $errors = [];
 if(!empty($_POST)){
 	$post = array_map('trim', array_map('strip_tags', $_POST));
 
-	if(!preg_match('/[[:upper:]]+/i',$post['firstname'])){
+	if(!preg_match('([A-Z]{1,}([a-zA-Z]{2,}))',$post['firstname'])){
 		$errors[] = 'Votre prénom doit comporter entre 3 et 20 caractères';
 	}
 
-	if(!minAndMaxLength($post['lastname'], 2, 20)){
+	if(!preg_match('([A-Z]{1,}([a-zA-Z]{2,}))',$post['lastname'])){
 		$errors[] = 'Votre nom doit comporter entre 3 et 20 caractères'; 
 	}
 

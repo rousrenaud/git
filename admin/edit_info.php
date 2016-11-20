@@ -36,11 +36,11 @@ if(!empty($_POST)){
 		$errors['adress'] = 'L\'adresse doit faire minimum 2 caractères';
 	}
 
-	if(!filter_var($post['mail'], FILTER_VALIDATE_EMAIL)){
+	if(!preg_match('/[a-z\.\-]+@[a-z]+\.[a-z]{2,3}/i',$post['mail'])){
 		$errors['mail'] = 'Le mail est invalide';
 	}
 
-	if(!minAndMaxLength($post['phone'], 8)){
+	if(!preg_match('#[0-9]{10,10}#',$post['phone'])){
 		$errors['phone'] = 'Le téléphone doit faire minimum 8 caractères';
 	}
     
