@@ -115,7 +115,9 @@ if(!empty($_POST)){
             	<label class="col-md-4 control-label" for="name">Restaurant</label>  
             	<div class="col-md-6">
             		<input id="name" name="name" type="text"  class="form-control input-md" value="<?php echo $info['name'] ?>">
-            		<?php if(isset($errors['name'])){ echo '<span style="color:red;">'.$errors['name'].'</span>';} ?>
+            		<p id="name" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['name'])){echo $errors['name'];} ?>
+                    </p>
             	</div>
             </div>
             
@@ -124,7 +126,9 @@ if(!empty($_POST)){
             	<label class="col-md-4 control-label" for="adress">Adresse</label>  
             	<div class="col-md-6">
             		<input id="adress" name="adress" type="text"  class="form-control input-md" value="<?php echo $info['adress'] ?>">
-            		<?php if(isset($errors['adress'])){ echo '<span style="color:red;">'.$errors['adress'].'</span>';} ?>	    
+            		<p id="adress_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['adress'])){echo $errors['adress'];} ?>
+                    </p>    
             	</div>
             </div>
             
@@ -133,7 +137,9 @@ if(!empty($_POST)){
 				<label class="col-md-4 control-label" for="phone">Téléphone</label>  
 				<div class="col-md-6">
 					<input id="phone" name="phone" type="phone"  class="form-control input-md" value="<?php echo $info['phone'] ?>">
-					<?php if(isset($errors['phone'])){ echo '<span style="color:red;">'.$errors['phone'].'</span>';} ?>
+					<p id="phone_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['phone'])){echo $errors['phone'];} ?>
+                    </p>
 				</div>
             </div>
             
@@ -142,7 +148,9 @@ if(!empty($_POST)){
 				<label class="col-md-4 control-label" for="mail">Email</label>  
 				<div class="col-md-6">
 					<input id="mail" name="mail" type="text"  class="form-control input-md" value="<?php echo $info['mail'] ?>">
-					<?php if(isset($errors['mail'])){ echo '<span style="color:red;">'.$errors['mail'].'</span>';} ?>
+					<p id="mail_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['mail'])){echo $errors['mail'];} ?>
+                    </p>
 				</div>
 			</div>
 

@@ -37,13 +37,12 @@ if(!empty($_POST) && $is_logged){
         $errors['ingredients'] = 'Votre liste d\'ingrédients doit comprendre entre 5 et 5 000 caractères'; 
     }
 
-<<<<<<< HEAD
     if(!preg_match('/[(^A-Z)+(\w+\s)]{20,}/i',$post['preparation'])) {
         $errors[] = 'Votre recette doit comprendre entre 5 et 10 000 caractères'; 
-=======
+    }
+        
     if(!preg_match('/[(\w+\s)]{5,140}/i',$post['preparation'])) {
         $errors['preparation'] = 'Votre recette doit comprendre entre 5 et 10 000 caractères'; 
->>>>>>> 1b806d664fca228db496887358620521480fb536
     }
 
     if(!minAndMaxLength($post['advice'], 5, 500)) {

@@ -17,15 +17,15 @@ if(!empty($_POST)){
 	$post = array_map('trim', array_map('strip_tags', $_POST)); 
 
 	if(!minAndMaxLength($post['firstname'], 3, 20)){
-		$errors[] = 'Votre prénom doit comporter entre 3 et 20 caractères';
+		$errors['firstname'] = 'Votre prénom doit comporter entre 3 et 20 caractères';
 	}
 
 	if(!minAndMaxLength($post['lastname'], 3, 20)){
-		$errors[] = 'Votre nom doit comporter entre 3 et 20 caractères';
+		$errors['lastname'] = 'Votre nom doit comporter entre 3 et 20 caractères';
 	}
 
 	if(!filter_var($post['mail'], FILTER_VALIDATE_EMAIL)){
-		$errors[] = 'Votre email est invalide';
+		$errors['mail'] = 'Votre email est invalide';
 	}
 	elseif(isset($post['mail'])){
         $req = $bdd->prepare('SELECT mail FROM users WHERE mail = :mail');
@@ -37,8 +37,8 @@ if(!empty($_POST)){
         }
     }
     
-    if(!is_numeric($post['perm'])){
-        $errors[] = 'Il faut sélectionner un niveau de permissions';
+    if(!isset($post['perm']) || !is_numeric($post['perm'])){
+        $errors['perm'] = 'Il faut sélectionner un niveau de permissions';
     }
     
 	if(count($errors) === 0){
@@ -60,7 +60,6 @@ if(!empty($_POST)){
 	}
     
 }
-
 if(isset($_GET['id']) && is_numeric($_GET['id'])){
 
 	$select = $bdd->prepare('SELECT * FROM users WHERE id = :idUser');
@@ -111,6 +110,9 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 					<label class="col-md-4 control-label" for="firstname">Prénom</label>  
 					<div class="col-md-6">
 						<input id="firstname" name="firstname" type="text" class="form-control input-md" placeholder="Son prénom..">
+						<p id="firstname_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['firstname'])){echo $errors['firstname'];} ?>
+                        </p>
 					</div>
 				</div>
 				
@@ -118,7 +120,10 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="lastname">Nom</label>  
 					<div class="col-md-6">
-						<input id="lastname" name="lastname" type="text" class="form-control input-md" placeholder="Son nom..">	    
+						<input id="lastname" name="lastname" type="text" class="form-control input-md" placeholder="Son nom..">	  
+						<p id="lastname_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['lastname'])){echo $errors['lastname'];} ?>
+                        </p>  
 					</div>
 				</div>
 				
@@ -127,13 +132,16 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 					<label class="col-md-4 control-label" for="mail">Email</label>  
 					<div class="col-md-6">
 						<input id="mail" name="mail" type="mail" class="form-control input-md" placeholder="Son Email..">
+						<p id="mail_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['mail'])){echo $errors['mail'];} ?>
+                        </p>
 					</div>
 				</div>
 				
 				<!-- Type d'utilisateur -->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="perm">Type d'utilisateur</label>
-					<div class="col-md-2">
+					<div class="col-md-4">
 						<select id="perm" name="perm" class="form-control">
 							<option value="" selected disabled>Type d'utilisateur</option>
 							</option>
@@ -142,6 +150,9 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 							<option value="1" >Editeur</option>
 							</option>
 						</select>
+						<p id="perm_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['perm'])){echo $errors['perm'];} ?>
+                        </p>
 					</div>
 				</div>	
 				
