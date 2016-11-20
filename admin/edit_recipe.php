@@ -18,36 +18,32 @@ if(!empty($_POST)){
 	// nettoyage des données entrées
 	$post = array_map('trim', array_map('strip_tags', $_POST));
 
-	if(!minAndMaxLength($post['recipe_author'], 3, 50)){
-		$errors[] = 'Le nom de l\'auteur doit comprendre entre 3 et 50 caractères';
-	}
-    
     if(!minAndMaxLength($post['recipe_title'], 5, 50)){
-		$errors[] = 'Le nom de votre recette doit comprendre entre 5 et 50 caractères';
+		$errors['recipe_title'] = 'Le nom de votre recette doit comprendre entre 5 et 50 caractères';
 	}
 
 	if(!is_numeric($post['recipe_time']) || empty($post['recipe_time'])) {
-		$errors[] = 'Le temps de préparation indiqué est incorrect';
+		$errors['recipe_time'] = 'Le temps de préparation indiqué est incorrect';
 	}
 
 	if(!is_numeric($post['cook_time']) || empty($post['cook_time'])) {
-		$errors[] = 'Le temps de cuisson indiqué est incorrect';
+		$errors['cook_time'] = 'Le temps de cuisson indiqué est incorrect';
 	}	
 
 	if(!is_numeric($post['people'])) {
-		$errors[] = 'Le nombre de personnes indiqué est invalide';
+		$errors['people'] = 'Le nombre de personnes indiqué est invalide';
 	}
 
 	if(!minAndMaxLength($post['ingredients'], 5, 5000)) {
-		$errors[] = 'Votre liste d\'ingrédients doit comprendre entre 5 et 5 000 caractères'; 
+		$errors['ingredients'] = 'Votre liste d\'ingrédients doit comprendre entre 5 et 5 000 caractères'; 
 	}
 
 	if(!minAndMaxLength($post['preparation'], 5, 10000)) {
-		$errors[] = 'Votre liste d\'ingrédients doit comprendre entre 5 et 10 000 caractères'; 
+		$errors['preparation'] = 'Votre liste d\'ingrédients doit comprendre entre 5 et 10 000 caractères'; 
 	}
 
 	if(!minAndMaxLength($post['advice'], 5, 500)) {
-		$errors[] = 'Les conseils doivent comprendre entre 5 et 500 caractères';
+		$errors['advice'] = 'Les conseils doivent comprendre entre 5 et 500 caractères';
 	}
 
 	// vérification de l'upload de fichier et envoi au serveur SuperJay
@@ -76,7 +72,7 @@ if(!empty($_POST)){
 	// Vérification des erreurs et envoi en DB
 	if(count($errors) === 0){
 
-		$columnSQL = 'recipe_author = :recipe_author, recipe_title = :recipe_title, recipe_time = :recipe_time, cook_time = :cook_time, people = :people, ingredients = :ingredients, preparation = :preparation, advice = :advice, date_publish = NOW()';
+		$columnSQL = 'recipe_title = :recipe_title, recipe_time = :recipe_time, cook_time = :cook_time, people = :people, ingredients = :ingredients, preparation = :preparation, advice = :advice, date_publish = NOW()';
 
 		// si la photo est modifiée
 		if($updatePhoto) {
@@ -87,7 +83,6 @@ if(!empty($_POST)){
 		$update = $bdd->prepare('UPDATE recipes SET '.$columnSQL.' WHERE id = :idRecipe');
 
         $update->bindValue(':idRecipe', $_GET['id'], PDO::PARAM_INT);
-		$update->bindValue(':recipe_author', $post['recipe_author']);
 		$update->bindValue(':recipe_title', $post['recipe_title']);
 		$update->bindValue(':recipe_time', $post['recipe_time']);
 		$update->bindValue(':cook_time', $post['cook_time']);
@@ -137,46 +132,41 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
     <?php include_once 'inc/navbar.php' ?>
     
     <main class="container">
-        <?php if($is_logged === true && $_SESSION['perm'] >= 1): ?>
-            <h1>Editer une recette</h1>
+        <?php if($is_logged && $_SESSION['perm'] >= 1): ?>   
+            <h1>Ajouter une recette</h1>
+
+            
 
             <?php if(isset($formValid) && $formValid == true): ?>
             <div class="alert alert-success">
-                La recette a bien été modifiée
+                La recette a bien été ajoutée !
             </div>
             <?php endif; ?>
             <br>
-            <?php if(!empty($recipe)): ?>
+
             <form method="post" class="form-horizontal" enctype="multipart/form-data">
-                
-                <!-- Auteur -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="recipe_author">Auteur de la recette : </label>
-                    <div class="col-md-6">
-                        <input type="text" name="recipe_author" id="recipe_author" class="form-control input-md" value="<?php echo $recipe['recipe_author'] ?>">
-                        <?php if(isset($errors['recipe_author'])){ echo '<div class="alert alert-danger">'.$errors['recipe_author'].'</div>';} ?>
-                    </div>
-                </div>
-                
+               
                 <!-- Nom de la recette -->
                 <div class="form-group">	
                     <label class="col-md-4 control-label" for="recipe_title">Nom de la recette : </label>
-                    <div class="col-md-6">
-                        <input type="text" name="recipe_title" id="recipe_title" class="form-control input-md" value="<?php echo $recipe['recipe_title'] ?>">
-                            <?php if(isset($errors['recipe_title'])){ echo '<div class="alert alert-danger">'.$errors['recipe_title'].'</div>';} ?>
+                     <div class="col-md-6">
+                        <input type="text" name="recipe_title" id="recipe_title" class="form-control input-md" placeholder="ex: Magrets de canard au miel...">
+                        <p id="title_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['recipe_title'])){echo $errors['recipe_title'];} ?>
+                        </p>
                     </div>
                 </div>
-                
+
                 <!-- Temps de préparation -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="recipe_time">Temps de préparation : </label>
                     <div class="col-md-6">
                         <select id="recipe_time" name="recipe_time">
-                            <option <?php if($recipe['recipe_time'] === 10){ echo 'selected';} ?> >10</option>
-                            <option <?php if($recipe['recipe_time'] === 15){ echo 'selected';} ?> >15</option>
-                            <option <?php if($recipe['recipe_time'] === 30){ echo 'selected';} ?> >30</option>
-                            <option <?php if($recipe['recipe_time'] === 45){ echo 'selected';} ?> >45</option>
-                            <option <?php if($recipe['recipe_time'] === 60){ echo 'selected';} ?> >60</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>30</option>
+                            <option>45</option>
+                            <option>60</option>
                         </select>
                     </div>
                 </div>  
@@ -186,11 +176,11 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <label class="col-md-4 control-label" for="cook_time">Temps de cuisson : </label>
                     <div class="col-md-6">
                         <select id="cook_time" name="cook_time">
-                            <option <?php if($recipe['cook_time'] === 10){ echo ' selected';} ?> >10</option>
-                            <option <?php if($recipe['cook_time'] === 15){ echo ' selected';} ?> >15</option>
-                            <option <?php if($recipe['cook_time'] === 30){ echo ' selected';} ?> >30</option>
-                            <option <?php if($recipe['cook_time'] === 45){ echo ' selected';} ?> >45</option>
-                            <option <?php if($recipe['cook_time'] === 60){ echo ' selected';} ?> >60</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>30</option>
+                            <option>45</option>
+                            <option>60</option>
                         </select>
                     </div>    
                 </div>
@@ -199,7 +189,10 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="people">Nombre de personnes : </label>
                     <div class="col-md-6">
-                        <input type="text" name="people" id="people" class="form-control input-md" value="<?php echo $recipe['people'] ?>">
+                        <input type="text" name="people" id="people" class="form-control input-md form-control-danger" placeholder="2">
+                        <p id="people_Help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['people'])){echo $errors['people'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -207,7 +200,10 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="ingredients">Ingrédients : </label>
                     <div class="col-md-6">
-                        <textarea name="ingredients" id="ingredients" class="form-control input-md" rows="6"><?php echo $recipe['ingredients'] ?></textarea>
+                        <textarea name="ingredients" id="ingredients" class="form-control input-md" rows="6" placeholder="ex: 2 magrets de canard gras, 3 cuillères à soupe miel 'mille fleurs' ou autre, 3 cuillères à café de vinaigre balsamique, sel..."></textarea>
+                        <p id="ingredients_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['ingredients'])){echo $errors['ingredients'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -215,7 +211,10 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="preparation">Préparation de la recette : </label>
                     <div class="col-md-6">
-                        <textarea name="preparation" id="preparation" class="form-control input-md" rows="6"><?php echo $recipe['ingredients'] ?></textarea>
+                        <textarea name="preparation" id="preparation" class="form-control input-md" rows="6" placeholder="ex: Inciser les magrets côté peau en quadrillage sans couper la viande. Cuire les magrets à feu vif dans une cocotte en fonte, en commençant par le côté peau..."></textarea>
+                        <p id="preparation_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['preparation'])){echo $errors['preparation'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -223,7 +222,10 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <div class="form-group">    
                     <label class="col-md-4 control-label" for="advice">Conseils : </label>
                     <div class="col-md-6">
-                        <textarea name="advice" id="advice" class="form-control input-md" rows="6"><?php echo $recipe['ingredients'] ?></textarea>
+                        <textarea name="advice" id="advice" class="form-control input-md" rows="6" placeholder="ex: Boisson conseillée : Madiran, Chinon.."></textarea>
+                        <p id="advice_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['advice'])){echo $errors['advice'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -232,6 +234,9 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <label class="col-md-4 control-label" for="photo">Photo de votre recette : </label>
                     <div class="col-md-6">
                         <input id="photo" name="photo" class="form-control input-md" type="file" accept="image/*">
+                        <p id="photo_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['photo'])){echo $errors['photo'];} ?>
+                        </p>
                     </div>
                 </div>
 
@@ -241,13 +246,9 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
                         <button type="submit" class="btn btn-info btn-block">Publier !</button>
                     </div>
                 </div>
-            <?php endif; ?>
-                
-            <?php if(empty($recipe)): ?>
-                Recette non trouvée !
-            <?php endif; ?>
             </form>
         <?php endif; ?>
+        <?php if(!$is_logged){header('Location: index.php');} ?>   
     </main>
 </body>
 </html>

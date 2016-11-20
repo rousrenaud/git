@@ -15,21 +15,31 @@ if(!empty($_POST)){
 	$post = array_map('trim', array_map('strip_tags', $_POST)); 
 
 	if(!minAndMaxLength($post['firstname'], 2, 20)){
-		$errors[] = 'Votre prénom doit comporter entre 3 et 20 caractères';
+		$errors['firstname'] = 'Votre prénom doit comporter entre 3 et 20 caractères';
 	}
 
 	if(!minAndMaxLength($post['lastname'], 2, 20)){
-		$errors[] = 'Votre nom doit comporter entre 3 et 20 caractères';
+		$errors['lastname'] = 'Votre nom doit comporter entre 3 et 20 caractères';
 	}
 
+<<<<<<< HEAD
 	if(!preg_match('/[a-z\.\-]+@[a-z]+\.[a-z]{2,3}/i',$post['mail'])){
 		$errors[] = 'Votre email est invalide';
+=======
+	if(!filter_var($post['mail'], FILTER_VALIDATE_EMAIL)){
+		$errors['mail'] = 'Votre email est invalide';
+>>>>>>> origin/master
 	}
 
 	if(!empty($post['password']) || $_SESSION['perm'] < 2){
 		$updatePassword = true;
+<<<<<<< HEAD
 		if(!preg_match('/[(\w+\s)]{8,20}/i',$post['password'])){
 			$errors[] = 'Votre mot de passe doit comporter entre 8 et 20 caractères';
+=======
+		if(!minAndMaxLength($post['password'], 8, 20)){
+			$errors['password'] = 'Votre mot de passe doit comporter entre 8 et 20 caractères';
+>>>>>>> origin/master
 		}
 	}
 
@@ -95,11 +105,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 		<?php if(empty($user)): ?>
 			<div class="alert alert-danger">
 				Utilisateur inconnu !
-			</div>
-		<?php elseif(count($errors) > 0): ?>
-			<div class="alert alert-danger">
-				<?=implode('<br>', $errors);?>
-			</div>		
+			</div>	
 		<?php elseif(isset($formValid) && $formValid == true): ?>
 			<div class="alert alert-success">
 				L'utilisateur a bien été mis à jour
@@ -115,6 +121,9 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 					<label class="col-md-4 control-label" for="firstname">Prénom</label>  
 					<div class="col-md-6">
 						<input id="firstname" name="firstname" type="text" class="form-control input-md" value="<?=$user['firstname'];?>">
+						<p id="firstname_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['firstname'])){echo $errors['firstname'];} ?>
+                        </p>
 					</div>
 				</div>
 
@@ -122,7 +131,10 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="lastname">Nom</label>  
 					<div class="col-md-6">
-						<input id="lastname" name="lastname" type="text" class="form-control input-md" value="<?=$user['lastname'];?>">	    
+						<input id="lastname" name="lastname" type="text" class="form-control input-md" value="<?=$user['lastname'];?>">	
+						<p id="lastname_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['lastname'])){echo $errors['lastname'];} ?>
+                        </p>    
 					</div>
 				</div>
 
@@ -131,6 +143,9 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 					<label class="col-md-4 control-label" for="mail">Email</label>  
 					<div class="col-md-6">
 						<input id="mail" name="mail" type="mail" class="form-control input-md" value="<?=$user['mail'];?>">
+						<p id="mail_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['mail'])){echo $errors['mail'];} ?>
+                        </p>
 					</div>
 				</div>
 
@@ -140,6 +155,9 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 					<label class="col-md-4 control-label" for="password">Mot de passe</label>
 					<div class="col-md-6">
 						<input id="password" name="password" type="password" class="form-control input-md">
+						<p id="password_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['password'])){echo $errors['password'];} ?>
+                        </p>
 					</div>
 				</div>
 				<?php endif; ?>
