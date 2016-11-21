@@ -77,6 +77,7 @@ if(!empty($_POST)){
 		// si la photo est modifiée
 		if($updatePhoto) {
 			$columnSQL.= ', photo = :photo';
+        }
 		}
 
 
