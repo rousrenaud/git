@@ -19,7 +19,7 @@
 		        <li><a href="message.php">Messages</a></li>
 		        <?php endif; ?>
 		        <li><a href="list_recipe.php">Liste des recettes</a></li>
-		        <li><a target="_blank" href="../../git/home_page.php">Voir le site</a></li>
+		        <li><a target="_blank" href="../../git/index.php">Voir le site</a></li>
       			<li><a href="logout.php">Déconnexion</a></li>
       		<?php else: ?>
       		<?php endif; ?>
