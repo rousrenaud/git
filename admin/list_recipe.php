@@ -17,7 +17,7 @@ if(!empty($_GET)) {
 	}
 }
 
-$query = $bdd->prepare('SELECT * FROM recipes'.$searchSQL);
+$query = $bdd->prepare('SELECT * FROM recipes LEFT JOIN users ON recipes.id_user=users.id'.$searchSQL);
 if(isset($get['search']) && !empty($get['search'])){
 	$query->bindValue(':search', '%'.$get['search'].'%');
 }
@@ -69,7 +69,7 @@ else {
                     <?php foreach($recipes as $recipe): ?>
                         <tr>
                             <th scope="row">
-                                <?=$recipe['recipe_author'];?>
+                                <?=$recipe['firstname'];?>
                             </td>
                             <td>
                                 <?=$recipe['recipe_title'];?>

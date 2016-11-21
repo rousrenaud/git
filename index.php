@@ -186,7 +186,7 @@ else {
 				<h3 class="nouveaute_color"> - <?=$user['recipe_title'];?> - </h3>
 				<p class="auteuralign"><?=$user['firstname'];?></p>
 				<div class="btnalign">
-					<a href="view_recette.php?id=<?=$user['id'];?>">
+					<a href="view_recette.php?id=<?=$recipe['id'];?>">
 						<button type="button" class="btn btn-danger">En savoir + 
 						</button>
 					</a>
