@@ -23,7 +23,12 @@
 }
 
 @media screen and (max-width: 960px) {
-
+	.recette_select {
+    margin: 0 auto;
+    padding: 10%;
+    position: relative;
+    z-index: 2;
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -38,10 +43,29 @@
 	.btn-danger {
     	padding: 8px 20px;
 	}
+	
+	.recette_select {
+    margin: 0 auto;
+    padding: 10%;
+    position: relative;
+    z-index: 2;
+	}
+	
+	.recette_select {
+    margin: 0 auto;
+    padding: 5%;
+    position: relative;
+    z-index: 2;
+	}
 }
 
 @media screen and (max-width: 568px) {
-
+	.recette_select {
+    margin: 0 auto;
+    padding: 0%;
+    position: relative;
+    z-index: 2;
+	}
 }
 
 @media screen and (max-width: 508px) {

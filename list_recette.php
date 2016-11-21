@@ -1,9 +1,9 @@
 <?php
 require_once 'inc/connect.php';
+require_once 'inc/datas.php';
 
-$searchSQL = '';
-$get = [];
-$searchdetail = $_GET['search'];
+if(!empty($_GET['search'])){$searchdetail = $_GET['search'];}
+else{ $searchdetail = '';}
 
 if(!empty($_GET)) {
 	$get = array_map('trim', array_map('strip_tags', $_GET));
@@ -12,14 +12,9 @@ if(!empty($_GET)) {
 		$searchSQL = ' WHERE recipe_title LIKE :search';
 	}
 	
-	if(isset($get['search']) && !empty($get['search'])) {
-		echo $get['search'];
-	}else {
-		echo '';
-	}
 }
 
-$query = $bdd->prepare('SELECT * FROM recipes'.$searchSQL);
+$query = $bdd->prepare('SELECT * FROM recipes' . $searchSQL);
 if(isset($get['search']) && !empty($get['search'])){
 	$query->bindValue(':search', $get['search']);
 }
@@ -41,7 +36,7 @@ else {
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Liste des recettes</title>
+	<title>Mes Recettes</title>
 	
 	<!--fontawesome-->
 	<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
@@ -132,7 +127,7 @@ else {
 <!--search bar-->
 <?php
     $namerecette = $_GET['search'];
-    $search = $bdd->prepare("SELECT * FROM recipes LEFT JOIN users ON recipes.id_user=users.id");
+    $search = $bdd->prepare("SELECT * FROM recipes where recipe_title like '%$namerecette%'");
 
     if($search->execute()){
     $recettename = $search->fetchAll(PDO::FETCH_ASSOC);
@@ -147,7 +142,7 @@ else {
 	
 	<div class="form-group">
 		<div class="input-group">
-		  <input type="text" class="form-control" placeholder="Cherchez une recette.." name="search" id="search" value="<?=(isset($get['search']) && !empty($get['search'])) ? $get['search'] : ''; ?>">
+		  <input type="text" class="form-control" placeholder="Cherchez vos recettes" name="search" id="search" value="<?=(isset($get['search']) && !empty($get['search'])) ? $get['search'] : ''; ?>">
 		  <!--<div class="input-group-addon btn btn-danger">
 			<i class="fa fa-search" aria-hidden="true"></i>	
 		  </div>-->
@@ -163,7 +158,7 @@ else {
 <!--section d'example de recette-->
 <?php if(empty($recettename)): ?>
 	<tr>
-		<td colspan="5"><h1>Aucune recette trouvée!</h1></td>
+		<td colspan="5"><h1>Aucun recette trouvé!</h1></td>
 	</tr>
 		<?php else: ?>
 	

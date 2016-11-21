@@ -10,7 +10,7 @@ function minAndMaxLength($str, $min = 2, $max = 255){
 
 	// On vérifie que la chaine soit remplie et bien de type string, sinon on retourne un message d'erreur
 	if(empty($str) || !is_string($str)){
-		return false;
+		return trigger_error('Le paramètre $str est invalide', E_USER_WARNING);
 	}
 
 	// On effectue la vérification sur la longueur de la chaine

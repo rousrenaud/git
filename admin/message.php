@@ -4,6 +4,10 @@ require_once 'inc/connect.php';
 if(!$is_logged){
     header('Location: index.php');
 }
+if($_SESSION['perm'] < 2){
+    header('Location: admin_main.php');
+    die();
+}
 
 $searchSQL = '';
 $get = [];

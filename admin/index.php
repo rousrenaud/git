@@ -68,6 +68,9 @@ if(!empty($_POST) && !$is_logged){
 				<label class="col-md-4 control-label" for="mail">Email</label>  
 				<div class="col-md-4">
 				    <input id="mail" name="mail" type="mail" class="form-control input-sd" placeholder="Entrez votre mail">
+				    <p id="firstname_help" class="form-text text-muted" style="color:red;">
+                            <?php if(!empty($errors['mail'])){echo $errors['mail'];} ?>
+                    </p>
 				</div>
             </div>
                

@@ -1,12 +1,7 @@
 <?php
+
 require_once 'inc/session.php';
 require_once 'inc/connect.php';
-if(!$is_logged){
-    header('Location: index.php');
-}
-elseif($_SESSION['perm'] < 2){
-    header('Location: admin_main.php');
-}
 
 $contact = null;
 if(isset($_GET['id']) && is_numeric($_GET['id'])){
@@ -43,8 +38,9 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 	<title>Supprimer un message</title>
 </head>
 <body>
+	
 	<?php include_once 'inc/navbar.php' ?>
-	<main class="container">
+	
 	<h1>Supprimer le message</h1>
 	
 	<hr>
@@ -63,6 +59,6 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 			<input type="submit" name="delete" value="Oui, je veux supprimer ce message" class="btn btn-danger">
 		</form>
 	<?php endif;?>
-	</main>
+	
 </body>
 </html>

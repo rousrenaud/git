@@ -2,10 +2,6 @@
 require_once 'inc/session.php';
 require_once 'inc/connect.php';
 
-if(!$is_logged){
-    header('Location: index.php');
-}
-
 $searchSQL = '';
 $get = [];
 
@@ -17,17 +13,14 @@ if(!empty($_GET)) {
 	}
 }
 
-$query = $bdd->prepare('SELECT * FROM recipes LEFT JOIN users ON recipes.id_user=users.id'.$searchSQL);
+$query = $bdd->prepare('SELECT * FROM recipes'.$searchSQL);
 if(isset($get['search']) && !empty($get['search'])){
 	$query->bindValue(':search', '%'.$get['search'].'%');
 }
 
-if($query->execute()){
-	$recipes = $query->fetchAll(PDO::FETCH_ASSOC);
-}
-else {
-    var_dump($query->errorInfo());
-    die;
+$select = $bdd->prepare('SELECT * FROM recipes');
+if($select->execute()){
+	$recipes = $select->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
 
@@ -42,56 +35,52 @@ else {
 </head>
 <body>
     <?php include_once 'inc/navbar.php' ?>
-    <main id="container">
-        <h1 class="text-center text-info">Liste des Recettes</h1>
-        <a href="add_recipe.php">Ajouter une recette</a><!-- A décaler à droite, face au <h1> -->
-        <hr>
+    <h1>Liste des Recettes</h1>
+	<h3><a href="add_recipe.php">Ajouter une recette</a></h3> <!-- A décaler à droite, face au <h1> -->
+	<hr>
 
-        <div>
-            <form method="GET">
-                <input type="text" id="search" name="search" placeholder="Chercher une recette..." value="<?=(isset($get['search']) && !empty($get['search'])) ? $get['search'] : ''; ?>">
-                <button type="submit">Rechercher !</button>
-            </form>
-        </div><br>
+	<div>
+		<form method="GET">
+			<input type="text" id="search" name="search" placeholder="Chercher une recette..." value="<?=(isset($get['search']) && !empty($get['search'])) ? $get['search'] : ''; ?>">
+			<button type="submit">Rechercher !</button>
+		</form>
+	</div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Qui a publié?</th>
-                    <th>Titre</th>
-                    <th>Contenu</th>
-                    <th>Photo</th>
-                    <th>Publié le :</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <?php foreach($recipes as $recipe): ?>
-                        <tr>
-                            <th scope="row">
-                                <?=$recipe['firstname'];?>
-                            </td>
-                            <td>
-                                <?=$recipe['recipe_title'];?>
-                            </td>
-                            <td>
-                                <pre><?=substr($recipe['preparation'], 0, 50);?></pre>
-                            </td>
-                            <td>
-                                <?=$recipe['photo'];?>
-                            </td>
-                            <td>
-                                <?=$recipe['date_publish'];?>
-                            </td>
-                            <td>
-                                <a href="view_recipe.php?id=<?=$recipe['id'];?>" title="Voir la recette">Voir la recette</a>
-                                <a href="edit_recipe.php?id=<?=$recipe['id'];?>" title="Voir la recette">Editer la recette</a>
-                                <a href="delete_recipe.php?id=<?=$recipe['id'];?>" title="Voir la recette">Supprimer la recette</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-            </tbody>
-        </table>
-    </main>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Qui a publié?</th>
+				<th>Titre</th>
+				<th>Contenu</th>
+				<th>Photo</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($recipes as $recipe): ?>
+				<tr>
+				    
+					<th scope="row"><!-- Trouver un moyen d'afficher le nom ou l'ID de la personne ayant publié la recette -->
+						<?=$recipe['id']?>
+					</td>
+					<td>
+						<?=$recipe['recipe_title']?>
+					</td>
+					<td>
+						<?=$recipe['preparation']?>
+					</td>
+					<td>
+						<?=$recipe['photo']?>
+					</td>
+					<td>
+						<a href="view_recipe.php?id=<?=$recipe['id'];?>" title="Voir la recette">Voir la recette</a>
+						<a href="edit_recipe.php?id=<?=$recipe['id'];?>" title="Voir la recette">Editer la recette</a>
+						<a href="delete_recipe.php?id=<?=$recipe['id'];?>" title="Voir la recette">Supprimer la recette</a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+
 </body>
 </html>

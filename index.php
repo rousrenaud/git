@@ -1,6 +1,6 @@
 <?php
 require_once 'inc/connect.php';
-
+require_once 'inc/datas.php';
 
 $itemsPerPage = 6;
 
@@ -10,11 +10,6 @@ if(!empty($_GET)) {
 	if(isset($get['search']) && !empty($get['search'])){
 		$searchSQL = ' WHERE recipe_title LIKE :search';
 	}
-}
-
-$select = $bdd->query('SELECT * FROM infos');
-if($select->execute()){
-	$info = $select->fetch(PDO::FETCH_ASSOC);
 }
 
 /*if(isset($_GET['page']) && !empty($_GET['page']) && is_numeric($_GET['page'])){
@@ -32,7 +27,7 @@ else {
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Azerquipe3</title>
+	<title>Mon Resto</title>
 	
 	<!--fontawesome-->
 	<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
@@ -75,15 +70,20 @@ else {
 </head>
 
 <?php
-    $search = $bdd->prepare('SELECT * FROM recipes LEFT JOIN users ON recipes.id_user=users.id');
+    $search = $bdd->prepare("SELECT * FROM recipes");
 
     if($search->execute()){
     $recettename = $search->fetchAll(PDO::FETCH_ASSOC);
     }
-    else{
-        var_dump($recettename);
-    }
 ?>	
+<?php 
+
+$select = $bdd->prepare('SELECT * FROM infos');
+if($select->execute()){
+	$info = $select->fetch(PDO::FETCH_ASSOC);
+}
+
+?>
 	
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <!-- Navigation -->
@@ -96,7 +96,7 @@ else {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.php"><h1 class="logomargin"><i class="fa fa-globe fa-1x" aria-hidden="true"></i> Azerquipe3</h1>
+                <a class="navbar-brand page-scroll" href="index.php"><h1 class="logomargin"><i class="fa fa-globe fa-1x" aria-hidden="true"></i> <?php echo $info['name'] ?></h1>
 				</a>
             </div>
 
@@ -135,24 +135,24 @@ else {
 		</ol> 
 		<div class="carousel-inner" role="listbox"> 
 			<div class="item"> 
-				<img alt="1920x756" src="<?php echo $info['photo1']; ?>" data-holder-rendered="true"> 
+				<img alt="1920x756" src="img/photodicouverte.jpg" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
-					<h3><?php echo $info['carroussel_title1']; ?></h3> 
-					<p><?php echo $info['carroussel_text1']; ?></p> 
+					<h3>Bienvenue sur Azerquipe3 !</h3> 
+					<p>Vous trouverez ici de nombreuses idées de recettes..</p> 
 				</div> 
 			</div> 
 			<div class="item"> 
-				<img alt="1920x756" src="<?php echo $info['photo2']; ?>" data-holder-rendered="true"> 
+				<img alt="1920x756" src="img/photodicouverte1.jpg" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
-					<h3><?php echo $info['carroussel_title2']; ?></h3> 
-					<p><?php echo $info['carroussel_text2']; ?></p> 
+					<h3>Un descriptif complet</h3> 
+					<p>..du temps de préparation aux petits conseils..</p> 
 				</div> 
 			</div> 
 			<div class="item active"> 
-				<img alt="1920x756" src="<?php echo $info['photo3']; ?>" data-holder-rendered="true"> 
+				<img alt="1920x756" src="img/photodicouverte2.jpg" data-holder-rendered="true"> 
 				<div class="carousel-caption"> 
-					<h3><?php echo $info['carroussel_title3']; ?></h3> 
-					<p><?php echo $info['carroussel_text3']; ?></p> 
+					<h3>Laissez nous un message</h3> 
+					<p>.. et n'hésitez pas à cliquer sur le lien "Contact" en haut pour nous écrire !</p> 
 				</div> 
 			</div> 
 		</div> 
@@ -172,7 +172,7 @@ else {
 <!--section d'example de recette-->
 <?php if(empty($recettename)): ?>
 	<tr>
-		<td colspan="5"><h1>Aucune recette trouvée!</h1></td>
+		<td colspan="5"><h1>Aucun recette trouvé!</h1></td>
 	</tr>
 		<?php else: ?>
 <form method="get">	
@@ -184,9 +184,9 @@ else {
 			  <img src="admin/<?=$user['photo'];?>" alt="nouveaute" class="recettehover">
 			  <div class="caption">
 				<h3 class="nouveaute_color"> - <?=$user['recipe_title'];?> - </h3>
-				<p class="auteuralign"><?=$user['firstname'];?></p>
+				<p class="auteuralign"><?=$user['recipe_author'];?></p>
 				<div class="btnalign">
-					<a href="view_recette.php?id=<?=$recipe['id'];?>">
+					<a href="view_recette.php?id=<?=$user['id'];?>">
 						<button type="button" class="btn btn-danger">En savoir + 
 						</button>
 					</a>

@@ -28,7 +28,6 @@ if(!empty($_POST) && !$is_logged){
 		}
 		else {
             $errors['db'] = 'Il y\'a eu un problème lors de l\'envoi des données';
-var_dump($insert->errorInfo());
 		}
 	}
 }
@@ -49,6 +48,7 @@ var_dump($insert->errorInfo());
 <body>
 <div id="login">
     <main class="container" >
+       
         <?php if($is_logged === true){ header('Location: admin_main.php');} ?>
         <?php if($formValid === true){ echo '<div class="alert alert-success">Vous allez recevoir un mail pour changer votre mot de passe</div>';} ?>
         <form method="POST" class="form-horizontal">

@@ -54,7 +54,7 @@ if(!empty($_POST)){
         
 		if($insert->execute()){
 			$formValid = true;
-            $monMessage = 'Vous avez reçu une invitation pour ajouter du contenu sur <b>O\'Fifou</b>.<br>Vous pouvez vous y connecter à partir du lien suivant:<br><a href="localhost/admin/index.php"<br>
+            /*$monMessage = 'Vous avez reçu une invitation pour ajouter du contenu sur <b>O\'Fifou</b>.<br>Vous pouvez vous y connecter à partir du lien suivant:<br><a href="localhost/admin/index.php"<br>
             Vos coordonnées sont:<ul><li>Mail : '.$post['mail'].'</li><li>Mot de passe : '.$pwd.'</li>';
                 
                 $mail = new PHPMailer;
@@ -81,7 +81,7 @@ if(!empty($_POST)){
                     $errors[] = 'Mailer Error: ' . $mail->ErrorInfo;
                 } else {
                     $success = true;
-                }
+                }*/
 		}
 		else {
 			var_dump($insert->errorInfo());
