@@ -85,7 +85,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
                         <a class="page-scroll" href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="home_page.php">ACCUEIL</a>
+                        <a class="page-scroll" href="index.php">ACCUEIL</a>
                     </li>
                     <li class="active1">
                         <a class="page-scroll" href="list_recette.php">RECETTE</a>

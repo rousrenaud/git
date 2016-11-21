@@ -96,7 +96,7 @@ else {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="home_page.php"><h1 class="logomargin"><i class="fa fa-globe fa-1x" aria-hidden="true"></i> Azerquipe3</h1>
+                <a class="navbar-brand page-scroll" href="index.php"><h1 class="logomargin"><i class="fa fa-globe fa-1x" aria-hidden="true"></i> Azerquipe3</h1>
 				</a>
             </div>
 
@@ -108,7 +108,7 @@ else {
                         <a class="page-scroll" href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="home_page.php">ACCUEIL</a>
+                        <a class="page-scroll" href="index.php">ACCUEIL</a>
                     </li>
                     <li class="active1">
                         <a class="page-scroll" href="list_recette.php">RECETTE</a>
@@ -132,7 +132,7 @@ else {
 <!--search bar-->
 <?php
     $namerecette = $_GET['search'];
-    $search = $bdd->prepare("SELECT * FROM recipes where recipe_title like '%$namerecette%'");
+    $search = $bdd->prepare("SELECT * FROM recipes LEFT JOIN users ON recipes.id_user=users.id");
 
     if($search->execute()){
     $recettename = $search->fetchAll(PDO::FETCH_ASSOC);
