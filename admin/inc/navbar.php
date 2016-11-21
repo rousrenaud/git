@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="admin_main.php">O'FIFOU</a>
+			<a class="navbar-brand" href="admin_main.php">Azerquipe 3</a>
 		</div>
 
 		<?php if($is_logged == true): ?>
