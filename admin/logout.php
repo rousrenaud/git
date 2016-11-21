@@ -1,8 +1,6 @@
 <?php
+
 require_once 'inc/session.php';
-if(!$is_logged){
-    header('Location: index.php');
-}
 
 $post = [];
 
@@ -29,6 +27,13 @@ if(!empty($_POST)){
 	}
 }
 
+
+// Redirige vers la page de connexion si déconnecté
+if($is_logged == false){
+    header('Location: index.php');
+    die;
+}
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -39,28 +44,28 @@ if(!empty($_POST)){
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<?php include_once 'inc/navbar.php'; ?>
-	
+ 	<?php include 'inc/navbar.php'; ?>
+
 	<main class="container">
 		<h1 class="text-center text-info">
 			<i class="fa fa-sign-out"></i> Déconnexion
 		</h1>
-		
+
 		<hr>
-		
+
 		<form method="post" class="form-horizontal">
-		
+
 			<h3>Voulez-vous vous déconnecter ?</h3>
-			
+
 			<button class="btn btn-default" name="disconnect" value="no">Non</button>
-			
+
 			&nbsp; 
-			
+
 			<button class="btn btn-info" name="disconnect" value="yes">Oui</button>
-			
+
 		</form>
-		
+
 	</main>
-	
+
 </body>
 </html>

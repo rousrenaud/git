@@ -36,28 +36,29 @@ if(!empty($_POST)){
 		$errors['adress'] = 'L\'adresse doit faire minimum 2 caractères';
 	}
 
-	if(!preg_match('/[a-z\.\-]+@[a-z]+\.[a-z]{2,3}/i',$post['mail'])){
+	if(!filter_var($post['mail'], FILTER_VALIDATE_EMAIL)){
 		$errors['mail'] = 'Le mail est invalide';
 	}
 
-	if(!preg_match('#[0-9]{10,10}#',$post['phone'])){
+	if(!minAndMaxLength($post['phone'], 8)){
 		$errors['phone'] = 'Le téléphone doit faire minimum 8 caractères';
 	}
-
-
+    
+    
+    
     //Insertion des données dans la DB
 	if(count($errors) === 0){
 		$columnSql = 'name = :name, phone = :phone, adress = :adress, mail = :mail ';
 
-		if($pic1_Update){
+		if($pic_Update){
 			$columnSql.=', photo1 = :photo1';
 		}
 
-		if($pic2_Update){
+		if($pic_Update){
 			$columnSql.=', photo2 = :photo2';
 		}
 
-		if($pic3_Update){
+		if($pic_Update){
 			$columnSql.=', photo3 = :photo3';
 		}
 
@@ -114,9 +115,7 @@ if(!empty($_POST)){
             	<label class="col-md-4 control-label" for="name">Restaurant</label>  
             	<div class="col-md-6">
             		<input id="name" name="name" type="text"  class="form-control input-md" value="<?php echo $info['name'] ?>">
-            		<p id="name" class="form-text text-muted" style="color:red;">
-                            <?php if(!empty($errors['name'])){echo $errors['name'];} ?>
-                    </p>
+            		<?php if(isset($errors['name'])){ echo '<span style="color:red;">'.$errors['name'].'</span>';} ?>
             	</div>
             </div>
             
@@ -125,9 +124,7 @@ if(!empty($_POST)){
             	<label class="col-md-4 control-label" for="adress">Adresse</label>  
             	<div class="col-md-6">
             		<input id="adress" name="adress" type="text"  class="form-control input-md" value="<?php echo $info['adress'] ?>">
-            		<p id="adress_help" class="form-text text-muted" style="color:red;">
-                            <?php if(!empty($errors['adress'])){echo $errors['adress'];} ?>
-                    </p>    
+            		<?php if(isset($errors['adress'])){ echo '<span style="color:red;">'.$errors['adress'].'</span>';} ?>	    
             	</div>
             </div>
             
@@ -136,9 +133,7 @@ if(!empty($_POST)){
 				<label class="col-md-4 control-label" for="phone">Téléphone</label>  
 				<div class="col-md-6">
 					<input id="phone" name="phone" type="phone"  class="form-control input-md" value="<?php echo $info['phone'] ?>">
-					<p id="phone_help" class="form-text text-muted" style="color:red;">
-                            <?php if(!empty($errors['phone'])){echo $errors['phone'];} ?>
-                    </p>
+					<?php if(isset($errors['phone'])){ echo '<span style="color:red;">'.$errors['phone'].'</span>';} ?>
 				</div>
             </div>
             
@@ -147,20 +142,19 @@ if(!empty($_POST)){
 				<label class="col-md-4 control-label" for="mail">Email</label>  
 				<div class="col-md-6">
 					<input id="mail" name="mail" type="text"  class="form-control input-md" value="<?php echo $info['mail'] ?>">
-					<p id="mail_help" class="form-text text-muted" style="color:red;">
-                            <?php if(!empty($errors['mail'])){echo $errors['mail'];} ?>
-                    </p>
+					<?php if(isset($errors['mail'])){ echo '<span style="color:red;">'.$errors['mail'].'</span>';} ?>
 				</div>
 			</div>
-
+			
 			<!-- Submit -->
-        	<div class="form-group">
-       	    <div class="col-md-4 col-md-offset-4">
-			    <button id="" name="" class="btn btn-info btn-block">Editer</button>
-            </div>
-        </div>
+
+       <div class="form-group">
+           <div class="col-md-4 col-md-offset-4">
+                <button id="" name="" class="btn btn-info btn-block">Editer</button>
+           </div>
+
+       </div>
         </form>
-       </main>
+	</main>
 </body>
 </html>
-

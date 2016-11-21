@@ -1,3 +1,3 @@
 <?php
 
-$bdd = new PDO('mysql:host=localhost;dbname=resto_DB;charset=utf8', 'root', '');
+$bdd = new PDO('mysql:host=localhost;dbname=resto_db;charset=utf8', 'root', '');

@@ -1,9 +1,7 @@
 <?php
+
 require_once 'inc/session.php';
 require_once 'inc/connect.php';
-if(!$is_logged){
-    header('Location: index.php');
-}
 
 if(isset($_GET['id']) && is_numeric($_GET['id'])) {
 
@@ -26,30 +24,30 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
     <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
+
 	<?php include_once 'inc/navbar.php' ?>
-	<main class="container">
-        <h1>Profil de l'utilisateur <?=$user['firstname'];?></h1>
+	
+	<h1>Profil de l'utilisateur <?=$user['firstname'];?></h1>
 
-        <hr>
+	<hr>
 
-        <?php if(empty($user)): ?>
-            <div class="alert alert-danger">
-                Utilisateur non trouvée !
-            </div>
-        <?php endif; ?>
+	<?php if(empty($user)): ?>
+		<div class="alert alert-danger">
+			Utilisateur non trouvée !
+		</div>
+	<?php endif; ?>
 
-        <div>
-            <ul> 
-                <li>Prenom : <?=$user['firstname'];?></li>
-                <li>Nom : <?=$user['lastname'];?></li>
-                <li>Email : <?=$user['mail']?></li>
-            </ul>
-        </div>
+	<div>
+		<ul> 
+			<li>Prenom : <?=$user['firstname'];?></li>
+			<li>Nom : <?=$user['lastname'];?></li>
+			<li>Email : <?=$user['mail']?></li>
+		</ul>
+	</div>
 
-        <div>
-            <a href="edit_user.php?id=<?=$user['id'];?>">Modifier le mot de passe</a>
-            <a href="delete_user.php?id=<?=$user['id'];?>">Supprimer l'utilisateur</a>
-        </div>
-	</main>
+	<div>
+		<a href="edit_user.php?id=<?=$user['id'];?>">Modifier le mot de passe</a>
+		<a href="delete_user.php?id=<?=$user['id'];?>">Supprimer l'utilisateur</a>
+	</div>
 </body>
 </html>

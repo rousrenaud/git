@@ -4,6 +4,10 @@ require_once 'inc/connect.php';
 if(!$is_logged){
     header('Location: index.php');
 }
+if($_SESSION['perm'] < 2){
+    header('Location: admin_main.php');
+    die();
+}
 
 if(isset($_GET['id']) && is_numeric($_GET['id'])) {
     
@@ -38,7 +42,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
         <?php if(!empty($contacts)): ?>
             <?php foreach($contacts as $contact): ?>
             <h1>Message : <?=$contact['lastname'];?></h1>
-            <p onload="checked()">Ce message est marqué comme Lu -</p>
+            <p onload="checked()">Ce message est marqué comme Lu</p>
             <hr>
             
             <div>
@@ -52,7 +56,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])) {
             
             <div>
                 <a href="message.php">Retour</a>
-                <a href="delete_message.php?id=<?=$recipe['id'];?>">Supprimer le message</a>
+                <a href="delete_message.php?id=<?=$contact['id'];?>">Supprimer le message</a>
             </div>
             <?php endforeach; ?>
         <?php endif; ?>
