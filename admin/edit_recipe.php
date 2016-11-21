@@ -40,7 +40,7 @@ if(!empty($_POST)){
 	}
 
 	if(!minAndMaxLength($post['advice'], 5, 500)) {
-		$errors = 'Les conseils doivent comprendre entre 5 et 500 caractères';
+		$errors[] = 'Les conseils doivent comprendre entre 5 et 500 caractères';
 	}
 
 	// vérification de l'upload de fichier et envoi au serveur 

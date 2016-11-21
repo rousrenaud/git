@@ -50,15 +50,15 @@ if(!empty($_POST)){
 	if(count($errors) === 0){
 		$columnSql = 'name = :name, phone = :phone, adress = :adress, mail = :mail ';
 
-		if($pic_Update){
+		if($pic1_Update){
 			$columnSql.=', photo1 = :photo1';
 		}
 
-		if($pic_Update){
+		if($pic2_Update){
 			$columnSql.=', photo2 = :photo2';
 		}
 
-		if($pic_Update){
+		if($pic3_Update){
 			$columnSql.=', photo3 = :photo3';
 		}
 
