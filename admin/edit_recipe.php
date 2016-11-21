@@ -78,7 +78,7 @@ if(!empty($_POST)){
 		if($updatePhoto) {
 			$columnSQL.= ', photo = :photo';
         }
-		}
+	
 
 
 		$update = $bdd->prepare('UPDATE recipes SET '.$columnSQL.' WHERE id = :idRecipe');
